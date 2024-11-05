@@ -12,7 +12,8 @@ class UserProfile(models.Model):
     social_links = models.JSONField(default=dict, blank=True)
 
     def __str__(self):
-        return self.user
+        return self.user.username  # Return the username as a string
+
 
 class Client(models.Model):
     """Client model to store information about clients worked with."""
