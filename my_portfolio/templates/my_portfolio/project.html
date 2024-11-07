@@ -1,0 +1,11 @@
+{% extends "my_portfolio/base.html" %}
+
+{% block content %}
+
+<h1>{{ project.title }}</h1>
+<img src="{{ project.image.url }}" alt="{{ project.title }}">
+<li>{{ project.technologies }} <br/></li>
+<a href="{{ project.live_link }}" target="_blank">View the live project here!</a>
+<a href="{{ project.repo_link }}" target="_blank">Click here to view the github repository.</a>
+<small>created at: {{ project.created_at }}</small>
+{% endblock content %}

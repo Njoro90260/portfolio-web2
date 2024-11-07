@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404
 from django.urls import reverse
 from .models import *
@@ -16,3 +16,10 @@ def projects_view(request):
     all_projects = Project.objects.all()
     context = {'projects': all_projects}
     return render(request, 'my_portfolio/projects.html', context)
+
+def project_view(request, id):
+    """page for a specific project."""
+    project = get_object_or_404(Project, id=id)
+    context = {'project': project}
+    return render(request, 'my_portfolio/project.html', context)
+
