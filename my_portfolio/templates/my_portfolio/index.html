@@ -9,4 +9,32 @@
  {% endfor %}
  <a href="{% url 'my_portfolio:projects' %}">View More</a>
 
- {% endblock content %}
+
+ {% comment %} services section {% endcomment %}
+
+ <h3>Services</h3>
+ {% for service in services %}
+ <h4>{{ service.name }}</h4>
+ <p>{{ service.description | linebreaks }}</p>
+ <button>{{ service.price }}</button>
+ {% endfor %}
+ 
+ {% comment %} client section. {% endcomment %}
+ <h3>Clients</h3>
+ {% for client in clients %}
+ <a href="{{ client.website.url }}">
+ {% comment %} the content to be dispalyed in a card. which will be a link.{% endcomment %}
+<h4>{{ client.name }}</h4>
+<img src="{{ client.image.url }}" alt ="{{ client.name }}">
+ </a>
+{% endfor %}
+
+{% comment %}  testimonial section. also part of the client section. {% endcomment %}
+<h3>Testimonials</h3>
+{% for client in clients %}
+<form action="{% url 'my_portfolio:index' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Add</button>
+{% endfor %}
+{% endblock content %}

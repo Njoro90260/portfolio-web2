@@ -4,8 +4,8 @@
 
 <h1>{{ project.title }}</h1>
 <img src="{{ project.image.url }}" alt="{{ project.title }}">
-<li>{{ project.technologies }} <br/></li>
-<a href="{{ project.live_link }}" target="_blank">View the live project here!</a>
-<a href="{{ project.repo_link }}" target="_blank">Click here to view the github repository.</a>
+<li>{{ project.technologies }}</li>
+<a href="{{ project.live_link }}" target="_blank">View the live project here!</a> <br/>
+<a href="{{ project.repo_link }}" target="_blank">Click here to view the github repository.</a> <br/>
 <small>created at: {{ project.created_at }}</small>
 {% endblock content %}

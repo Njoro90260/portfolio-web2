@@ -2,13 +2,32 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404
 from django.urls import reverse
 from .models import *
+from .forms import ClientForm
 
 
 # Create your views here.
 def index(request):
     """View function for the page."""
     projects = Project.objects.all()[:3]
-    context = {'projects': projects}
+    services = Service.objects.all()
+    clients = Client.objects.all()
+    """Clients. Testimonial."""
+    # Client to add testimonial.
+    if request.method != 'POST':
+        # No data submitted; create a blank form
+        form = ClientForm()
+    else:
+        # Post data submitted; process data.
+        form = ClientForm(data=request.POST)
+        if form.is_valid():
+            client_testimonial = form.save(commit=True)
+            client_testimonial.save()
+    context = {
+        'projects': projects,
+        'services': services, 
+        'clients': clients,
+        'client_testimonial': client_testimonial
+        }
     return render(request, 'my_portfolio/index.html', context)
 
 def projects_view(request):
