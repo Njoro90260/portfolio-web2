@@ -11,7 +11,8 @@ def index(request):
     projects = Project.objects.all()[:3]
     services = Service.objects.all()
     clients = Client.objects.all()
-    """Clients. Testimonial."""
+    """Clients Testimonial."""
+    client_testimonial = None
     # Client to add testimonial.
     if request.method != 'POST':
         # No data submitted; create a blank form
@@ -20,13 +21,16 @@ def index(request):
         # Post data submitted; process data.
         form = ClientForm(data=request.POST)
         if form.is_valid():
-            client_testimonial = form.save(commit=True)
+            client_testimonial = form.save(commit=False)
             client_testimonial.save()
+            # Redirect to prevent duplicate submission
+            return redirect('index')
     context = {
         'projects': projects,
         'services': services, 
         'clients': clients,
-        'client_testimonial': client_testimonial
+        'client_testimonial': client_testimonial,
+        'form': form
         }
     return render(request, 'my_portfolio/index.html', context)
 
