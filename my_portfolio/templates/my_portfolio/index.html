@@ -4,37 +4,45 @@
 <h2>Featured Projects</h2>
 
 {% for project in projects %}
- <h3>{{ project.title }}</h3>
- <img src="{{ project.image.url }}" alt="{{ project.title }}">
- {% endfor %}
- <a href="{% url 'my_portfolio:projects' %}">View More</a>
+<h3>{{ project.title }}</h3>
+<img src="{{ project.image.url }}" alt="{{ project.title }}">
+{% endfor %}
+<a href="{% url 'my_portfolio:projects' %}">View More</a>
 
 
- {% comment %} services section {% endcomment %}
+<!-- {% comment %} services section {% endcomment %} -->
 
- <h3>Services</h3>
- {% for service in services %}
- <h4>{{ service.name }}</h4>
- <p>{{ service.description | linebreaks }}</p>
- <button>{{ service.price }}</button>
- {% endfor %}
- 
- {% comment %} client section. {% endcomment %}
- <h3>Clients</h3>
- {% for client in clients %}
- <a href="{{ client.website.url }}">
- {% comment %} the content to be dispalyed in a card. which will be a link.{% endcomment %}
-<h4>{{ client.name }}</h4>
-<img src="{{ client.image.url }}" alt ="{{ client.name }}">
- </a>
+<h3>Services</h3>
+{% for service in services %}
+<h4>{{ service.name }}</h4>
+<p>{{ service.description | linebreaks }}</p>
+<button>{{ service.price }}</button>
 {% endfor %}
 
-{% comment %}  testimonial section. also part of the client section. {% endcomment %}
-<h3>Testimonials</h3>
+<!-- {% comment %} client section. {% endcomment %} -->
+<h3>Clients</h3>
 {% for client in clients %}
-<form action="{% url 'my_portfolio:index' %}" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button name="submit">Add</button>
+<div class="clients">
+    <a href="{{ client.website }}">
+        <!-- {% comment %} the content to be dispalyed in a card. which will be a link.{% endcomment %} -->
+        <h4>{{ client.name }}</h4>
+        {% if client.logo %}
+        <img src="{{ client.logo.url }}" alt="{{ client.name }} logo">
+        {% else %}
+        <p>No logo availabele</p>
+        {% endif %}
+        <p></p>
+    </a>
+    <blockquote>{{ client.testimonial }}</blockquote>
+</div>
 {% endfor %}
+<h3>Testimonials</h3>
+<!-- Clients to add testimonials -->
+<form id="testimonial-form">
+    <input type="hidden" name="client_id" value="client.id">
+    <textarea name="testimonial" id="" placeholder="Write your testimonial here..."></textarea>
+    <button type="button" id="submit-testimonial">Submit Testimonial</button>
+</form>
+
+<div id="response-message"></div>
 {% endblock content %}

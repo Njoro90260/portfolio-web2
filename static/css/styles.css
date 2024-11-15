@@ -5,3 +5,7 @@ img {
     width: 100vh;
     height: auto;
 }
+.clients {
+    border-style: solid;
+    border-width: 1px;
+}

@@ -11,4 +11,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('projects/', views.projects_view, name='projects'),
     path('project/<int:id>', views.project_view, name='project'),
+    path('add-testimonial/', views.add_testimonial, name='add_testimonial'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
