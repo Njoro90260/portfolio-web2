@@ -1,3 +1,4 @@
+get client in url before asking for a testimonial (client/<int:client_id>/)
 ask the clients to leave a review
 manually add the client name in the database, and their website url
 they just have to submit their testimonial
