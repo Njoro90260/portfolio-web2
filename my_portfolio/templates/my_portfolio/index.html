@@ -18,31 +18,4 @@
 <p>{{ service.description | linebreaks }}</p>
 <button>{{ service.price }}</button>
 {% endfor %}
-
-<!-- {% comment %} client section. {% endcomment %} -->
-<h3>Clients</h3>
-{% for client in clients %}
-<div class="clients">
-    <a href="{{ client.website }}">
-        <!-- {% comment %} the content to be dispalyed in a card. which will be a link.{% endcomment %} -->
-        <h4>{{ client.name }}</h4>
-        {% if client.logo %}
-        <img src="{{ client.logo.url }}" alt="{{ client.name }} logo">
-        {% else %}
-        <p>No logo availabele</p>
-        {% endif %}
-        <p></p>
-    </a>
-    <blockquote>{{ client.testimonial }}</blockquote>
-</div>
-{% endfor %}
-<h3>Testimonials</h3>
-<!-- Clients to add testimonials -->
-<form id="testimonial-form">
-    <input type="hidden" name="client_id" value="client.id">
-    <textarea name="testimonial" id="" placeholder="Write your testimonial here..."></textarea>
-    <button type="button" id="submit-testimonial">Submit Testimonial</button>
-</form>
-
-<div id="response-message"></div>
 {% endblock content %}

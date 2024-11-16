@@ -11,11 +11,11 @@ def index(request):
     """View function for the page."""
     projects = Project.objects.all()[:3]
     services = Service.objects.all()
-    clients = Client.objects.all()
+    # clients = Client.objects.all()
     context = {
         'projects': projects,
         'services': services, 
-        'clients': clients,
+        # 'clients': clients,
         }
     return render(request, 'my_portfolio/index.html', context)
 
@@ -31,19 +31,19 @@ def project_view(request, id):
     context = {'project': project}
     return render(request, 'my_portfolio/project.html', context)
 
-def add_testimonial(request):
-    """Client to add testimonial """
-    if request.method == 'POST':
-        client_id = request.POST.get('client_id')
-        testimonial_text = request.POST.get('testimonial')
+# def add_testimonial(request):
+#     """Client to add testimonial """
+#     if request.method == 'POST':
+#         client_id = request.POST.get('client_id')
+#         testimonial_text = request.POST.get('testimonial')
 
-        try:
-            # Fetch the client and update the testimonial
-            client = Client.objects.get(id=client_id)
-            client.testimonial = testimonial_text
-            client.save()
-            return JsonResponse({'status': 'success', 'message': 'Testimonial added successfully.'})
-        except Client.DoesNotExist:
-            return JsonResponse({'status': 'error', 'message': 'Client not found'})
-    else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
+#         try:
+#             # Fetch the client and update the testimonial
+#             client = Client.objects.get(id=client_id)
+#             client.testimonial = testimonial_text
+#             client.save()
+#             return JsonResponse({'status': 'success', 'message': 'Testimonial added successfully.'})
+#         except Client.DoesNotExist:
+#             return JsonResponse({'status': 'error', 'message': 'Client not found'})
+#     else:
+#         return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})

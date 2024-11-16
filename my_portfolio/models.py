@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import uuid
 
 # Create your models here.
 
@@ -20,10 +21,19 @@ class Client(models.Model):
     name = models.CharField(max_length=100)
     logo = models.ImageField(upload_to='clients/', blank=True, null=True)
     website = models.URLField(blank=True)
-    testimonial = models.TextField(blank=True)
+    unique_token = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     def __str__(self):
         return self.name
+    
+
+class Testimonial(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    testimonial_text = models.TextField()
+    submitted_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Testimonial from {self.client.name}: {self.testimonial_text[:50]}..."
 
 
 class Project(models.Model):
@@ -34,9 +44,7 @@ class Project(models.Model):
     live_link = models.URLField(blank=True, null=True)
     repo_link = models.URLField(blank=True, null=True)
     image = models.ImageField(upload_to='projects/', blank=True, null=True)
-    client = models.ForeignKey('Client', on_delete=models.SET_NULL, null=True, blank=True, related_name='projects')
     created_at = models.DateField(auto_now_add=True)
-
     def __str__(self):
         return self.title
 
