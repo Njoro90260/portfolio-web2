@@ -11,11 +11,11 @@ def index(request):
     """View function for the page."""
     projects = Project.objects.all()[:3]
     services = Service.objects.all()
-    # clients = Client.objects.all()
+    clients = Client.objects.all()
     context = {
         'projects': projects,
         'services': services, 
-        # 'clients': clients,
+        'clients': clients,
         }
     return render(request, 'my_portfolio/index.html', context)
 
@@ -31,6 +31,9 @@ def project_view(request, id):
     context = {'project': project}
     return render(request, 'my_portfolio/project.html', context)
 
+def client_detail(request, client_id):
+    client = get_object_or_404(Client, unique=client_id)
+    return render(request, 'client_detail.html', {'client': client})
 # def add_testimonial(request):
 #     """Client to add testimonial """
 #     if request.method == 'POST':

@@ -18,4 +18,15 @@
 <p>{{ service.description | linebreaks }}</p>
 <button>{{ service.price }}</button>
 {% endfor %}
+
+<!-- Clients -->
+<h3>Clients</h3>
+{% for client in clients %}
+ <div class="clients">
+    <a href="{{ client.website }}">
+        <h4>{{ client.name }}</h4>
+        <img src="{{ client.logo.url }}" alt="{{ client.name }}">
+    </a>
+ </div>
+ {% endfor %}
 {% endblock content %}
