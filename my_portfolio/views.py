@@ -34,6 +34,8 @@ def project_view(request, id):
 def client_detail(request, client_id):
     client = get_object_or_404(Client, unique=client_id)
     return render(request, 'client_detail.html', {'client': client})
+
+def submit_testimonial(request, toke)
 # def add_testimonial(request):
 #     """Client to add testimonial """
 #     if request.method == 'POST':
