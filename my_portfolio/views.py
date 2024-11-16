@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404
 from django.urls import reverse
 from .models import *
-from .forms import ClientForm
+from .forms import *
 from django.http import JsonResponse
 
 
@@ -12,10 +12,12 @@ def index(request):
     projects = Project.objects.all()[:3]
     services = Service.objects.all()
     clients = Client.objects.all()
+    client_instance = Client.objects.first()
     context = {
         'projects': projects,
         'services': services, 
         'clients': clients,
+        'token': client_instance.unique_token
         }
     return render(request, 'my_portfolio/index.html', context)
 
@@ -35,7 +37,20 @@ def client_detail(request, client_id):
     client = get_object_or_404(Client, unique=client_id)
     return render(request, 'client_detail.html', {'client': client})
 
-def submit_testimonial(request, toke)
+def submit_testimonial(request, token):
+    client = get_object_or_404(Client, unique_token=token)
+    if request.method == 'POST':
+        form = TestimonialForm(request.POST)
+        if form.is_valid():
+            testimonial = form.save(commit=False)
+            testimonial.client = client
+            testimonial.save()
+            return redirect('testimonial_thank_you')
+    else:
+        form = TestimonialForm()
+    context = {'form': form, 'client': client}
+    return render(request, 'my_portfolio/submit_testimonial.html', context)
+        
 # def add_testimonial(request):
 #     """Client to add testimonial """
 #     if request.method == 'POST':
