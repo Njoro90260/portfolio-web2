@@ -14,4 +14,5 @@ urlpatterns = [
     # path('add-testimonial/', views.add_testimonial, name='add_testimonial'),
     # path('client/<int:client_id>/testimonial/', views.client_detail, name='submit_testimonial'),
     path('client/<uuid:token>/testimonial/', views.submit_testimonial, name='submit_testimonial'),
+    path('thank-you/', views.testimonial_thank_you, name='testimonial_thank_you'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -9,3 +9,6 @@ img {
     border-style: solid;
     border-width: 1px;
 }
+li{
+    list-style: none;
+}

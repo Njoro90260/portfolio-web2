@@ -29,6 +29,17 @@
     </a>
  </div>
  {% endfor %}
+
+<!-- Testimonials -->
+ <h3>Testimonials</h3>
+{% for testimonial in testimonials %}
+<li>
+    <h4>{{ testimonial.client }}</h4>
+    <p>{{ testimonial.testimonial_text }}</p>
+    <small>{{ testimonial.submitted_on }}</small>
+</li>
+{% endfor %}
+
  <h3>Add Testimonial</h3>
  <a href="{% url 'my_portfolio:submit_testimonial' token %}">Add Testimonial</a>
 {% endblock content %}

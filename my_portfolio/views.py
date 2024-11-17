@@ -13,11 +13,13 @@ def index(request):
     services = Service.objects.all()
     clients = Client.objects.all()
     client_instance = Client.objects.first()
+    testimonials = Testimonial.objects.all()
     context = {
         'projects': projects,
         'services': services, 
         'clients': clients,
-        'token': client_instance.unique_token
+        'token': client_instance.unique_token,
+        'testimonials': testimonials
         }
     return render(request, 'my_portfolio/index.html', context)
 
@@ -39,17 +41,21 @@ def client_detail(request, client_id):
 
 def submit_testimonial(request, token):
     client = get_object_or_404(Client, unique_token=token)
+    testimonials = Testimonial.objects.filter(client=client)
     if request.method == 'POST':
         form = TestimonialForm(request.POST)
         if form.is_valid():
             testimonial = form.save(commit=False)
             testimonial.client = client
             testimonial.save()
-            return redirect('testimonial_thank_you')
+            return redirect('my_portfolio:testimonial_thank_you')
     else:
         form = TestimonialForm()
-    context = {'form': form, 'client': client}
+    context = {'form': form, 'client': client, 'testimonials': testimonials}
     return render(request, 'my_portfolio/submit_testimonial.html', context)
+
+def testimonial_thank_you(request):
+    return render(request, 'my_portfolio/testimonial_thank_you.html')
         
 # def add_testimonial(request):
 #     """Client to add testimonial """
