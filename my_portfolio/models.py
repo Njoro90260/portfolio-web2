@@ -19,6 +19,7 @@ class UserProfile(models.Model):
 class Client(models.Model):
     """Client model to store information about clients worked with."""
     name = models.CharField(max_length=100)
+    email = models.EmailField(blank=True, null=True)
     logo = models.ImageField(upload_to='clients/', blank=True, null=True)
     website = models.URLField(blank=True)
     unique_token = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
