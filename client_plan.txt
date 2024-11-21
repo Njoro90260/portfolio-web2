@@ -1,6 +1,6 @@
 get client in url before asking for a testimonial (client/<int:client_id>/)
 ask the clients to leave a review
-manually add the client name in the database, and their website url
+manually add the client name in the database, and their website url in the admin site after working with them
 they just have to submit their testimonial
 ask for their name or enerprice which will foreign key to client model
 create a new model for testimonials which will foreign key to clients to create a link between the clients and their testimonials
