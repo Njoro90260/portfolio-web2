@@ -9,7 +9,7 @@ def send_testimonial_email(modeladmin, request, queryset):
     for client in queryset:
         """Generate the personalised testimonial link."""
         link = reverse('my_portfolio:submit_testimonial', args=[client.unique_token])
-        full_link = f"https://mywebsite.com{link}" # To be replaced with my domain
+        full_link = f"http://localhost:8000{link}" # To be replaced with my domain
         message = (
             f"Hello {client.name},\n\n"
             f"Please submit your testimonial using the following link:\n{full_link}"
@@ -20,7 +20,7 @@ def send_testimonial_email(modeladmin, request, queryset):
             send_mail(
                 'Submit Your Testimonial',
                 message,
-                'admin@mywebsite.com',
+                'wchegesalome@gmail.com',
                 [client.email],
             )
     modeladmin.message_user(request, "Testimonial links sent successfully!")
@@ -33,8 +33,8 @@ class ClientAdmin(admin.ModelAdmin):
 
     def testimonial_link(self, obj):
         """Display a clickable link in the admin interface."""
-        url = reverse('my_portfolio:submit_testmonial', args=[obj.unique_token])
-        return format_html('<a href="{}" target="_blank">Submit Testimonial</a>', f"https://mywebsite.com{url}")
+        url = reverse('my_portfolio:submit_testimonial', args=[obj.unique_token])
+        return format_html('<a href="{}" target="_blank">Submit Testimonial</a>', f"http://localhost:8000{url}")
 
     testimonial_link.short_description = 'Testimonial Link'   
 
