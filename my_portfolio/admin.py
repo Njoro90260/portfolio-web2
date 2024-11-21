@@ -20,7 +20,7 @@ def send_testimonial_email(modeladmin, request, queryset):
             send_mail(
                 'Submit Your Testimonial',
                 message,
-                'admin@ihicodes.com',
+                'peternjoroge738@yahoo.com',
                 [client.email],
             )
     modeladmin.message_user(request, "Testimonial links sent successfully!")
