@@ -40,6 +40,10 @@
 </li>
 {% endfor %}
 
- <h3>Add Testimonial</h3>
- <a href="{% url 'my_portfolio:submit_testimonial' token %}">Add Testimonial</a>
+<h3>Contact Us.</h3>
+<form action="." method="post">
+    {% csrf_token %}
+    {{ contact_form.as_p }}
+    <button type="submit">Send Message</button>
+</form>
 {% endblock content %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404
+from django.contrib import messages
 from django.urls import reverse
 from .models import *
 from .forms import *
@@ -14,14 +15,30 @@ def index(request):
     clients = Client.objects.all()
     client_instance = Client.objects.first()
     testimonials = Testimonial.objects.all()
-    contact_messages = ContactMessage.objects.all()
+
+    def handle_contact_form():
+        """Contact Form Handling Function."""
+        if request.method == 'POST':
+            form = ContactMessageForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Your message has been sent successfully!")
+                return True
+            else:
+                messages.error(request, "Whoops! There was an error sending your message. Please Try again")
+        return False
+    contact_form = ContactMessageForm()
+    form_submitted = handle_contact_form()
+    if form_submitted:
+        return redirect('my_portfolio:index')
+
     context = {
         'projects': projects,
         'services': services, 
         'clients': clients,
         'token': client_instance.unique_token,
         'testimonials': testimonials,
-        'contact_messages': contact_messages
+        'contact_form': contact_form
         }
     return render(request, 'my_portfolio/index.html', context)
 
