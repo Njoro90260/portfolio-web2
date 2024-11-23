@@ -14,12 +14,14 @@ def index(request):
     clients = Client.objects.all()
     client_instance = Client.objects.first()
     testimonials = Testimonial.objects.all()
+    contact_messages = ContactMessage.objects.all()
     context = {
         'projects': projects,
         'services': services, 
         'clients': clients,
         'token': client_instance.unique_token,
-        'testimonials': testimonials
+        'testimonials': testimonials,
+        'contact_messages': contact_messages
         }
     return render(request, 'my_portfolio/index.html', context)
 
@@ -57,19 +59,3 @@ def submit_testimonial(request, token):
 def testimonial_thank_you(request):
     return render(request, 'my_portfolio/testimonial_thank_you.html')
         
-# def add_testimonial(request):
-#     """Client to add testimonial """
-#     if request.method == 'POST':
-#         client_id = request.POST.get('client_id')
-#         testimonial_text = request.POST.get('testimonial')
-
-#         try:
-#             # Fetch the client and update the testimonial
-#             client = Client.objects.get(id=client_id)
-#             client.testimonial = testimonial_text
-#             client.save()
-#             return JsonResponse({'status': 'success', 'message': 'Testimonial added successfully.'})
-#         except Client.DoesNotExist:
-#             return JsonResponse({'status': 'error', 'message': 'Client not found'})
-#     else:
-#         return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})

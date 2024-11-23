@@ -13,3 +13,7 @@ newsletter subscription
  integrate API to give related articles.
 
  Use dark styling to give a good layout.
+
+
+
+**Remenber to foreign key the client email from the client form.**
