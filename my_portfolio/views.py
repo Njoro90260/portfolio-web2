@@ -4,8 +4,8 @@ from django.contrib import messages
 from django.urls import reverse
 from .models import *
 from .forms import *
-from django.http import JsonResponse
-
+from django.core.mail import send_mail
+from decouple import config
 
 # Create your views here.
 def index(request):
@@ -21,9 +21,19 @@ def index(request):
         if request.method == 'POST':
             form = ContactMessageForm(request.POST)
             if form.is_valid():
-                form.save()
-                messages.success(request, "Your message has been sent successfully!")
-                return True
+                message = form.save()
+                # Send email notification.
+                send_mail(
+                    subject=f"New Contact Message from {message.name}",
+                    message = f"You've recieved a new message:\n\n"
+                        f"Name: {message.name}\n"
+                        f"Email: {message.email}\n"
+                        f"Subject: {message.subject}\n\n"
+                        f"message.message",
+                from_email= config('EMAIL_HOST_USER'),
+                recipeint_list=['wchegesalome@gmail.com', 'peternjoroge738@yahoo.com'],
+                )
+                return True, "Your message has been sent successfully!" 
             else:
                 messages.error(request, "Whoops! There was an error sending your message. Please Try again")
         return False
