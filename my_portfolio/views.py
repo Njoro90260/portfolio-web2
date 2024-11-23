@@ -29,9 +29,9 @@ def index(request):
                         f"Name: {message.name}\n"
                         f"Email: {message.email}\n"
                         f"Subject: {message.subject}\n\n"
-                        f"message.message",
+                        f"{message.message}",
                 from_email= config('EMAIL_HOST_USER'),
-                recipeint_list=['wchegesalome@gmail.com', 'peternjoroge738@yahoo.com'],
+                recipient_list= config('RECIPIENT_LIST').split(','),
                 )
                 return True, "Your message has been sent successfully!" 
             else:
