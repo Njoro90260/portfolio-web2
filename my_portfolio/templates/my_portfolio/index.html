@@ -46,4 +46,11 @@
     {{ contact_form.as_p }}
     <button type="submit">Send Message</button>
 </form>
+
+<!-- subscription_form.html -->
+ <form action="{% url 'my_portfolio:newsletter_subscribe' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="">Subscribe</button>
+ </form>
 {% endblock content %}

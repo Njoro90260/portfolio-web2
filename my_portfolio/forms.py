@@ -23,7 +23,7 @@ class ContactMessageForm(forms.ModelForm):
             'message',
         ]
         
-class NewsletterSubscription(forms.ModelForm):
+class NewsletterSubscriptionForm(forms.ModelForm):
     class Meta:
         model= NewsletterSubscription
         fields = ['email']

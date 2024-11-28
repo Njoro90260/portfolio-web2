@@ -85,4 +85,18 @@ def submit_testimonial(request, token):
 
 def testimonial_thank_you(request):
     return render(request, 'my_portfolio/testimonial_thank_you.html')
-        
+
+def newsletter_subscribe(request):
+    if request.method == 'POST':
+        form = NewsletterSubscriptionForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            subscription, created = NewsletterSubscription.objects.get_or_create(email=email)
+            if created:
+                messages.success(request, "Thank you for subscribing!")
+            else:
+                messages.info(request, "You're already subscribed.")
+        else:
+            messages.error(request, "invalid email address.")
+        return redirect('my_portfolio:index')
+    return redirect('my_portfolio:index')
