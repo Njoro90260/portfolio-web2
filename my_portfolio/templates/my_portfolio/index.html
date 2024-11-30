@@ -47,10 +47,12 @@
     <button type="submit">Send Message</button>
 </form>
 
-<!-- subscription_form.html -->
- <form action="{% url 'my_portfolio:newsletter_subscribe' %}" method="POST">
+<!-- Newsletter Subscription Form -->
+ <h2>Subscribe to Our Newsletter</h2>
+ <form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="">Subscribe</button>
+    <button type="submit">Subscribe</button>
  </form>
+
 {% endblock content %}

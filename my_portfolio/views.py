@@ -37,6 +37,22 @@ def index(request):
             else:
                 messages.error(request, "Whoops! There was an error sending your message. Please Try again")
         return False
+    
+    def newsletter_subscribe():
+        if request.method == 'POST':
+            form = NewsletterSubscriptionForm(request.POST)
+            if form.is_valid():
+                email = form.cleaned_data['email']
+                subscription, created = NewsletterSubscription.objects.get_or_create(email=email)
+                if created:
+                    messages.success(request, "Thank you for subscribing!")
+                else:
+                    messages.info(request, "You're already subscribed.")
+                return redirect('my_portfolio:index')
+        else:
+            return NewsletterSubscriptionForm()
+        
+    newsletter = newsletter_subscribe()
     contact_form = ContactMessageForm()
     form_submitted = handle_contact_form()
     if form_submitted:
@@ -48,7 +64,8 @@ def index(request):
         'clients': clients,
         'token': client_instance.unique_token,
         'testimonials': testimonials,
-        'contact_form': contact_form
+        'contact_form': contact_form,
+        'newsletter': newsletter
         }
     return render(request, 'my_portfolio/index.html', context)
 
@@ -85,18 +102,3 @@ def submit_testimonial(request, token):
 
 def testimonial_thank_you(request):
     return render(request, 'my_portfolio/testimonial_thank_you.html')
-
-def newsletter_subscribe(request):
-    if request.method == 'POST':
-        form = NewsletterSubscriptionForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            subscription, created = NewsletterSubscription.objects.get_or_create(email=email)
-            if created:
-                messages.success(request, "Thank you for subscribing!")
-            else:
-                messages.info(request, "You're already subscribed.")
-        else:
-            messages.error(request, "invalid email address.")
-        return redirect('my_portfolio:index')
-    return redirect('my_portfolio:index')
