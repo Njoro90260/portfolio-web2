@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import Http404
 from django.contrib import messages
 from django.urls import reverse
 from .models import *
@@ -16,8 +15,12 @@ def index(request):
     client_instance = Client.objects.first()
     testimonials = Testimonial.objects.all()
 
-    form_submitted = False  # Track form submission
-    newsletter_subscribed = False  # Track newsletter subscription
+    form_submitted = False 
+    newsletter_subscribed = False
+
+    # initialize to avoid UnboundLocalError
+    contact_form = ContactMessageForm()
+    newsletter_form = NewsletterSubscriptionForm()
 
     if request.method == 'POST':
         # Handle contact form
@@ -49,19 +52,11 @@ def index(request):
                 subscription, created = NewsletterSubscription.objects.get_or_create(email=email)
                 if created:
                     messages.success(request, "Thank you for subscribing!")
-                    newsletter_subscribed = True
+                    # newsletter_subscribed = True
                 else:
                     messages.info(request, "You're already subscribed.")
             else:
                 messages.error(request, "Invalid email. Please try again.")
-
-    else:
-        contact_form = ContactMessageForm()
-        newsletter_form = NewsletterSubscriptionForm()
-
-    # Redirect only if forms were successfully processed
-    if form_submitted or newsletter_subscribed:
-         return redirect('my_portfolio:index')
 
     context = {
         'projects': projects,
