@@ -15,9 +15,6 @@ def index(request):
     client_instance = Client.objects.first()
     testimonials = Testimonial.objects.all()
 
-    form_submitted = False 
-    newsletter_subscribed = False
-
     # initialize to avoid UnboundLocalError
     contact_form = ContactMessageForm()
     newsletter_form = NewsletterSubscriptionForm()
