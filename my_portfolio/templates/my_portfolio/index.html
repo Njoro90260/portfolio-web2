@@ -44,15 +44,15 @@
 <form action="." method="post">
     {% csrf_token %}
     {{ contact_form.as_p }}
-    <button type="submit">Send Message</button>
+    <button type="submit" name="contact_submit">Send Message</button>
 </form>
 
 <!-- Newsletter Subscription Form -->
  <h2>Subscribe to Our Newsletter</h2>
- <form action="" method="post">
+ <form action="." method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Subscribe</button>
+    {{ newsletter_form.as_p }}
+    <button type="submit" name="newsletter_submit">Subscribe</button>
  </form>
 
 {% endblock content %}

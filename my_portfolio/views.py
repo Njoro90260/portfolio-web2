@@ -16,58 +16,64 @@ def index(request):
     client_instance = Client.objects.first()
     testimonials = Testimonial.objects.all()
 
-    def handle_contact_form():
-        """Contact Form Handling Function."""
-        if request.method == 'POST':
-            form = ContactMessageForm(request.POST)
-            if form.is_valid():
-                message = form.save()
-                # Send email notification.
+    form_submitted = False  # Track form submission
+    newsletter_subscribed = False  # Track newsletter subscription
+
+    if request.method == 'POST':
+        # Handle contact form
+        if 'contact_submit' in request.POST:
+            contact_form = ContactMessageForm(request.POST)
+            if contact_form.is_valid():
+                message = contact_form.save()
+                # Send email notification
                 send_mail(
                     subject=f"New Contact Message from {message.name}",
-                    message = f"You've recieved a new message:\n\n"
-                        f"Name: {message.name}\n"
-                        f"Email: {message.email}\n"
-                        f"Subject: {message.subject}\n\n"
-                        f"{message.message}",
-                from_email= config('EMAIL_HOST_USER'),
-                recipient_list= config('RECIPIENT_LIST').split(','),
+                    message=f"You've received a new message:\n\n"
+                            f"Name: {message.name}\n"
+                            f"Email: {message.email}\n"
+                            f"Subject: {message.subject}\n\n"
+                            f"{message.message}",
+                    from_email=config('EMAIL_HOST_USER'),
+                    recipient_list=config('RECIPIENT_LIST').split(','),
                 )
-                return True, "Your message has been sent successfully!" 
+                messages.success(request, "Your message has been sent successfully!")
+                form_submitted = True
             else:
-                messages.error(request, "Whoops! There was an error sending your message. Please Try again")
-        return False
-    
-    def newsletter_subscribe():
-        if request.method == 'POST':
-            form = NewsletterSubscriptionForm(request.POST)
-            if form.is_valid():
-                email = form.cleaned_data['email']
+                messages.error(request, "Whoops! There was an error sending your message. Please try again.")
+
+        # Handle newsletter subscription
+        elif 'newsletter_submit' in request.POST:
+            newsletter_form = NewsletterSubscriptionForm(request.POST)
+            if newsletter_form.is_valid():
+                email = newsletter_form.cleaned_data['email']
                 subscription, created = NewsletterSubscription.objects.get_or_create(email=email)
                 if created:
                     messages.success(request, "Thank you for subscribing!")
+                    newsletter_subscribed = True
                 else:
                     messages.info(request, "You're already subscribed.")
-                return redirect('my_portfolio:index')
-        else:
-            return NewsletterSubscriptionForm()
-        
-    newsletter = newsletter_subscribe()
-    contact_form = ContactMessageForm()
-    form_submitted = handle_contact_form()
-    if form_submitted:
-        return redirect('my_portfolio:index')
+            else:
+                messages.error(request, "Invalid email. Please try again.")
+
+    else:
+        contact_form = ContactMessageForm()
+        newsletter_form = NewsletterSubscriptionForm()
+
+    # Redirect only if forms were successfully processed
+    if form_submitted or newsletter_subscribed:
+         return redirect('my_portfolio:index')
 
     context = {
         'projects': projects,
-        'services': services, 
+        'services': services,
         'clients': clients,
-        'token': client_instance.unique_token,
+        'token': client_instance.unique_token if client_instance else None,
         'testimonials': testimonials,
         'contact_form': contact_form,
-        'newsletter': newsletter
-        }
+        'newsletter_form': newsletter_form,
+    }
     return render(request, 'my_portfolio/index.html', context)
+
 
 def projects_view(request):
     """Fetch all projects."""
