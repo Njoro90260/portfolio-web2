@@ -1,5 +1,5 @@
 from django import forms
-from .models import Client, Testimonial, ContactMessage, NewsletterSubscription
+from .models import Client, Testimonial, ContactMessage, NewsletterSubscription, UserProfile
 
 class ClientForm(forms.ModelForm):
     class Meta:
@@ -37,3 +37,9 @@ class NewsletterSubscriptionForm(forms.ModelForm):
         labels = {
             'email': '',
         }
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['bio', 'profile_picture', 'social_links']
+        

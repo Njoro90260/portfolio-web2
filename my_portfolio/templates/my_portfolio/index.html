@@ -1,6 +1,12 @@
 {% extends "my_portfolio/base.html" %}
 
 {% block content %}
+<!-- Profiles -->
+<div>
+    <h2>User Profile</h2>
+    <a href="{% url 'my_portfolio:profile' username=user.username %}">View Profile</a>
+</div>
+<!-- Projects section -->
 <h2>Featured Projects</h2>
 
 {% for project in projects %}
@@ -8,7 +14,6 @@
 <img src="{{ project.image.url }}" alt="{{ project.title }}">
 {% endfor %}
 <a href="{% url 'my_portfolio:projects' %}">View More</a>
-
 
 <!-- {% comment %} services section {% endcomment %} -->
 

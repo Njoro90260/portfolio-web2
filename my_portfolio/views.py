@@ -1,3 +1,5 @@
+from django.db.models.base import Model as Model
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import *
@@ -65,6 +67,7 @@ def index(request):
         'testimonials': testimonials,
         'contact_form': contact_form,
         'newsletter_form': newsletter_form,
+        'user': request.user
     }
     return render(request, 'my_portfolio/index.html', context)
 
@@ -99,3 +102,30 @@ def submit_testimonial(request, token):
 def testimonial_thank_you(request):
     return render(request, 'my_portfolio/testimonial_thank_you.html')
 
+class UserProfileDetailView(DetailView):
+    model = UserProfile
+    template_name = 'my_portfolio/user_profile.html'
+
+    context_object_name = 'profile'
+
+    def get_object(self, queryset=None):
+        # Get profile based on the username from the URL
+        username = self.kwargs.get('username')
+        return get_object_or_404(UserProfile, user__username=username)
+    
+
+class UserProfileUpdateView(UpdateView):
+    model = UserProfile
+    template_name = 'my_portfolio/edit_profile.html'
+    form_class = UserProfileForm
+
+    def get_object(self, queryset=None):
+        # Restrict edditing to the profile owner
+        profile = get_object_or_404(UserProfile, user=self.request.user)
+        return profile
+    
+
+    def get_success_url(self):
+        return reverse_lazy('my_portfolio:profile', kwargs={'username': self.request.user.username})
+
+    
