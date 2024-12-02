@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>Submit Your Testimonial for {{ client.name }}</h1>
-<form method="post">
+<form method="post" class="form">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Submit</button>

@@ -46,7 +46,7 @@
 {% endfor %}
 
 <h3>Contact Us.</h3>
-<form action="." method="post">
+<form action="." method="post" class="form">
     {% csrf_token %}
     {{ contact_form.as_p }}
     <button type="submit" name="contact_submit">Send Message</button>
@@ -54,7 +54,7 @@
 
 <!-- Newsletter Subscription Form -->
  <h2>Subscribe to Our Newsletter</h2>
- <form action="." method="post">
+ <form action="." method="post" class="form">
     {% csrf_token %}
     {{ newsletter_form.as_p }}
     <button type="submit" name="newsletter_submit">Subscribe</button>
