@@ -1,0 +1,18 @@
+{% extends "my_portfolio/base.html" %}
+
+{% block content %}
+<h2>{{ profile.user.username }}'s Profile</h2>
+<img src="{{ profile.profile_picture.url }}" alt="Profile Picture">
+<p><strong>Bio:</strong> {{ profile.bio }}</p>
+<p><strong>Social Links:</strong></p>
+<ul>
+    {% for key, value in profile.social_links.items %}
+    <li>
+        {{ key }}: <a href="{{ value }}" target="_blank">{{ value }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% if user.is_authenticated and user == profile.user %}
+<a href="{% url 'my_portfolio:edit_profile' username=profile.user.username %}">Edit Profile</a>
+{% endif %}
+{% endblock content %}
