@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.urls import reverse
 from .models import *
 from .forms import *
 from django.core.mail import send_mail
 from decouple import config
+from django.views.generic import DetailView, UpdateView
+from django.contrib.auth.models import User
+from django.urls import reverse_lazy
 
 # Create your views here.
 def index(request):
@@ -79,10 +81,6 @@ def project_view(request, id):
     context = {'project': project}
     return render(request, 'my_portfolio/project.html', context)
 
-def client_detail(request, client_id):
-    client = get_object_or_404(Client, unique=client_id)
-    return render(request, 'client_detail.html', {'client': client})
-
 def submit_testimonial(request, token):
     client = get_object_or_404(Client, unique_token=token)
     testimonials = Testimonial.objects.filter(client=client)
@@ -100,3 +98,4 @@ def submit_testimonial(request, token):
 
 def testimonial_thank_you(request):
     return render(request, 'my_portfolio/testimonial_thank_you.html')
+
