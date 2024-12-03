@@ -1,11 +1,13 @@
 {% extends "my_portfolio/base.html" %}
 
 {% block content %}
+<section>
 <!-- Profiles -->
 <div>
     <h2>User Profile</h2>
     <a href="{% url 'my_portfolio:profile' username=user.username %}">View Profile</a>
 </div>
+</section>
 <!-- Projects section -->
  <section id="projects">
     <h2>Featured Projects</h2>
