@@ -1,6 +1,11 @@
 body {
     overflow-x: hidden;
 }
+nav, li {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
 img {
     width: 100vh;
     height: auto;
@@ -8,7 +13,4 @@ img {
 .clients {
     border-style: solid;
     border-width: 1px;
-}
-li{
-    list-style: none;
 }
