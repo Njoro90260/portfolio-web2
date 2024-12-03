@@ -7,57 +7,70 @@
     <a href="{% url 'my_portfolio:profile' username=user.username %}">View Profile</a>
 </div>
 <!-- Projects section -->
-<h2>Featured Projects</h2>
+ <section id="projects">
+    <h2>Featured Projects</h2>
 
-{% for project in projects %}
-<h3>{{ project.title }}</h3>
-<img src="{{ project.image.url }}" alt="{{ project.title }}">
-{% endfor %}
-<a href="{% url 'my_portfolio:projects' %}">View More</a>
+    {% for project in projects %}
+    <h3>{{ project.title }}</h3>
+    <img src="{{ project.image.url }}" alt="{{ project.title }}">
+    {% endfor %}
+    <a href="{% url 'my_portfolio:projects' %}">View More</a>
 
-<!-- {% comment %} services section {% endcomment %} -->
+ </section>
 
-<h3>Services</h3>
-{% for service in services %}
-<h4>{{ service.name }}</h4>
-<p>{{ service.description | linebreaks }}</p>
-<button>{{ service.price }}</button>
-{% endfor %}
+ <section id="services">
+    <!-- {% comment %} services section {% endcomment %} -->
+    <h3>Services</h3>
+    {% for service in services %}
+    <h4>{{ service.name }}</h4>
+    <p>{{ service.description | linebreaks }}</p>
+    <button>{{ service.price }}</button>
+    {% endfor %}
 
-<!-- Clients -->
-<h3>Clients</h3>
-{% for client in clients %}
- <div class="clients">
-    <a href="{{ client.website }}">
-        <h4>{{ client.name }}</h4>
-        <img src="{{ client.logo.url }}" alt="{{ client.name }}">
-    </a>
- </div>
- {% endfor %}
+ </section>
 
-<!-- Testimonials -->
+ <section id="clients">
+    <!-- Clients -->
+    <h3>Clients</h3>
+    {% for client in clients %}
+     <div class="clients">
+        <a href="{{ client.website }}">
+            <h4>{{ client.name }}</h4>
+            <img src="{{ client.logo.url }}" alt="{{ client.name }}">
+        </a>
+     </div>
+     {% endfor %}
+ </section>
+
+<section id="Testimonials">
+    <!-- Testimonials -->
  <h3>Testimonials</h3>
-{% for testimonial in testimonials %}
-<li>
-    <h4>{{ testimonial.client }}</h4>
-    <p>{{ testimonial.testimonial_text }}</p>
-    <small>{{ testimonial.submitted_on }}</small>
-</li>
-{% endfor %}
+ {% for testimonial in testimonials %}
+ <li>
+     <h4>{{ testimonial.client }}</h4>
+     <p>{{ testimonial.testimonial_text }}</p>
+     <small>{{ testimonial.submitted_on }}</small>
+ </li>
+ {% endfor %}
+</section>
 
-<h3>Contact Us.</h3>
+<section id="contact">
+    <h3>Contact Us.</h3>
 <form action="." method="post" class="form">
     {% csrf_token %}
     {{ contact_form.as_p }}
     <button type="submit" name="contact_submit">Send Message</button>
 </form>
+</section>
 
+<section>
 <!-- Newsletter Subscription Form -->
- <h2>Subscribe to Our Newsletter</h2>
- <form action="." method="post" class="form">
-    {% csrf_token %}
-    {{ newsletter_form.as_p }}
-    <button type="submit" name="newsletter_submit">Subscribe</button>
- </form>
+<h2>Subscribe to Our Newsletter</h2>
+<form action="." method="post" class="form">
+   {% csrf_token %}
+   {{ newsletter_form.as_p }}
+   <button type="submit" name="newsletter_submit">Subscribe</button>
+</form>
+</section>
 
 {% endblock content %}
