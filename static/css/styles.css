@@ -29,3 +29,7 @@ img {
       font-size: 3.5rem;
     }
   }
+  .myfieldclass{
+    width: 30% !important;
+    height: 100px !important;
+  }
