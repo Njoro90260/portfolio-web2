@@ -33,3 +33,18 @@ img {
     width: 30% !important;
     height: 100px !important;
   }
+.centered-nav {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+.navbar-collapse {
+  display: flex;
+  justify-content: center;
+}
+@media (max-width: 992px) {
+  .navbar-collapse {
+    flex-direction: column;
+    align-items: center;
+  }
+}
