@@ -1,6 +1,9 @@
+* {
+  font-weight: 400;
+}
 body {
     overflow-x: hidden;
-    background-color: black;
+    background-color: #100721;
     color: white;
 }
 nav, li {
@@ -8,11 +11,7 @@ nav, li {
     flex-direction: row;
     list-style: none;
 }
-img {
-    width: 100vh;
-    height: auto;
-}
-.clients {
+#clients {
     border-style: solid;
     border-width: 1px;
 }
@@ -24,15 +23,6 @@ img {
     user-select: none;
   }
 
-  @media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-      font-size: 3.5rem;
-    }
-  }
-  .myfieldclass{
-    width: 30% !important;
-    height: 100px !important;
-  }
 .centered-nav {
   display: flex;
   justify-content: center;
@@ -42,6 +32,19 @@ img {
   display: flex;
   justify-content: center;
 }
+.carousel-item .row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.carousel-item .content {
+  border-radius: 0.5rem;
+  box-shadow: 1px 5px 15px #1e0e3e;
+  overflow: hidden;
+  text-align: center;
+}
+
 .carousel_container h3 {
   text-align: center;
   color: #fff;
@@ -50,6 +53,7 @@ img {
 
 .carousel_container {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   height: 500px;
   gap: 10px;
@@ -100,14 +104,19 @@ img {
   color: #fff;
 }
 .content {
-  background: url('{{ client.logo.url }}');
+  background-image: url('{{ client.logo.url }}');
   height: 500px;
 }
 
-
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
 @media (max-width: 992px) {
   .navbar-collapse {
     flex-direction: column;
     align-items: center;
   }
 }
+

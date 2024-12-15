@@ -9,13 +9,20 @@ from decouple import config
 from django.views.generic import DetailView, UpdateView
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
+from itertools import zip_longest
 
 # Create your views here.
+def make_groups(iterable, group_size):
+    """Helper function to group items into chunks."""
+    args = [iter(iterable)] * group_size
+    return zip_longest(*args, fillvalue=None)
+
 def index(request):
     """View function for the page."""
     projects = Project.objects.all()[:3]
     services = Service.objects.all()
     clients = Client.objects.all()
+    client_groups = list(make_groups(clients, 3))
     client_instance = Client.objects.first()
     testimonials = Testimonial.objects.all()
 
@@ -63,6 +70,7 @@ def index(request):
         'projects': projects,
         'services': services,
         'clients': clients,
+        'client_groups': client_groups,
         'token': client_instance.unique_token if client_instance else None,
         'testimonials': testimonials,
         'contact_form': contact_form,

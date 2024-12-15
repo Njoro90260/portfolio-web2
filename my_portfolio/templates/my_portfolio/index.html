@@ -45,38 +45,56 @@
 </section>
 <hr>
 <section id="clients" class="carousel_container">
-  <!-- client section -->
   <h3>Clients</h3>
-  <div id="clientsCarousel" class="carousel slide" data-bs-ride="carousel">
+  <!-- carousel -->
+  <!-- <div id="clientsCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-      {% for client in clients %}
+      {% for group in client_groups %}
       <div class="carousel-item {% if forloop.first %}active{% endif %}">
-        <div class="container d-flex justify-content-center">
-          <div>
+        <div class="row">
+          {% for client in group %}
+          {% if client %}
+          <div class="col-md-4">
             <a href="{{ client.website }}" class="d-block text-decoration-none">
-              <div class="content">
+              <div class="content" style="background: url('{{ client.logo.url }}') no-repeat center/cover; height: 300px;">
                 <h4>{{ client.name }}</h4>
                 <span>{{ client.description }}</span>
               </div>
             </a>
           </div>
+          {% endif %}
+          {% endfor %}
         </div>
       </div>
-      style="background: url('{{ client.logo.url }}') no-repeat 50%/cover; height: 500px;"
       {% endfor %}
     </div>
-  </div>
-  <!-- Carousel controls -->
-  <button class="carousel-control-prev" type="button" data-bs-target="#clientsCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#clientsCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
+
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#clientsCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#clientsCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div> -->
+  <div class="carousel_container">
+    {% for group in client_groups %}
+    <div>
+      {% for client in group %}
+      {% if client %}
+      <div class="content">
+        <h2>{{ client.name }}</h2>
+        <span>{{ client.description }}</span>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endfor %}
   </div>
 </section>
+
 
 <hr>
 
