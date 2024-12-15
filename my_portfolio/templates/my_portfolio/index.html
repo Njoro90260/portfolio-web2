@@ -44,33 +44,40 @@
 
 </section>
 <hr>
-<section id="clients" class="container">
-  <!-- Clients -->
+<section id="clients" class="carousel_container">
+  <!-- client section -->
   <h3>Clients</h3>
   <div id="clientsCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       {% for client in clients %}
       <div class="carousel-item {% if forloop.first %}active{% endif %}">
-        <a href="{{ client.website }}">
-          <img src="{{ client.logo.url }}" alt="{{ client.name }}" class="d-block w-100">
-          <div class="carousel-caption d-none d-md-block">
-            <h4>{{ client.name }}</h4>
+        <div class="container d-flex justify-content-center">
+          <div>
+            <a href="{{ client.website }}" class="d-block text-decoration-none">
+              <div class="content">
+                <h4>{{ client.name }}</h4>
+                <span>{{ client.description }}</span>
+              </div>
+            </a>
           </div>
-        </a>
+        </div>
       </div>
+      style="background: url('{{ client.logo.url }}') no-repeat 50%/cover; height: 500px;"
       {% endfor %}
     </div>
-    <!-- Carousel controls -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#clientsCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#clientsCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+  </div>
+  <!-- Carousel controls -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#clientsCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#clientsCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
   </div>
 </section>
+
 <hr>
 
 <section id="Testimonials" class="container">
