@@ -79,14 +79,13 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div> -->
-  <div class="carousel_container">
+  <div class="clientcontainer">
     {% for group in client_groups %}
     <div>
       {% for client in group %}
       {% if client %}
       <div class="content">
-        <h2>{{ client.name }}</h2>
-        <span>{{ client.description }}</span>
+        <h1>{{ client.name }}</h1>
       </div>
       {% endif %}
       {% endfor %}
