@@ -1,3 +1,4 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
 :root {
   --text-color1: #FFF;
@@ -32,6 +33,24 @@ nav, li {
 .navbar-collapse {
   display: flex;
   justify-content: center;
+}
+
+.grid-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.project-container :is(img) {
+  height: 100%;
+  max-height: 50dvh;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.grid-text {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }
 .clientcontainer {
   display: flex;

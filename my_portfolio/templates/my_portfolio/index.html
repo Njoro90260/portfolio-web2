@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<section class="Container">
+<section>
   <!-- Profiles -->
   <div class="px-3">
     <div>
@@ -22,18 +22,36 @@
 </section>
 <hr>
 <!-- Projects section -->
-<section id="projects" class="container">
+<section id="projects">
   <h2>Featured Projects</h2>
 
-  {% for project in projects %}
-  <h3>{{ project.title }}</h3>
-  <img src="{{ project.image.url }}" alt="{{ project.title }}" class="img-thumbnail">
-  {% endfor %}
-  <a href="{% url 'my_portfolio:projects' %}">View More</a>
+  <div class="row project-container">
+    {% for project in projects %}
+      {% if forloop.counter|divisibleby:2 %}
+        <div class="col-md-6 grid-cell grid-text">
+          <h3>{{ project.title }}</h3>
+          <p>{{ project.description | truncatewords:50 }}</p>
+        </div>
+        <div class="col-md-6 grid-cell">
+          <img src="{{ project.image.url }}" alt="{{ project.title }}">
+        </div>
+      {% else %}
+        <div class="col-md-6 grid-cell">
+          <img src="{{ project.image.url }}" alt="{{ project.title }}">
+        </div>
+        <div class="col-md-6 grid-cell grid-text">
+          <h3>{{ project.title }}</h3>
+          <p>{{ project.description | truncatewords:50 }}</p>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
 
+  <a href="{% url 'my_portfolio:projects' %}">View More</a>
 </section>
+
 <hr>
-<section id="services" class="container">
+<section id="services">
   <!-- {% comment %} services section {% endcomment %} -->
   <h3>Services</h3>
   {% for service in services %}
@@ -44,7 +62,8 @@
 
 </section>
 <hr>
-<section>
+<section id="clients">
+  <h3>Clients</h3>
   <!-- Carousel Container -->
   <div id="clientCarousel" class="carousel slide" data-bs-ride="carousel">
     
@@ -87,7 +106,7 @@
 
 <hr>
 
-<section id="Testimonials" class="container">
+<section id="Testimonials">
   <!-- Testimonials -->
   <h3>Testimonials</h3>
   {% for testimonial in testimonials %}
@@ -124,7 +143,7 @@
   </form>
 </section>
 <hr>
-<section class="container">
+<section>
   <!-- Newsletter Subscription Form -->
   <h2>Subscribe to Our Newsletter</h2>
   <form action="." method="post" class="form">
