@@ -1,18 +1,19 @@
-* {
-  font-weight: 400;
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
+:root {
+  --text-color1: #FFF;
+  --color1: #1e0e3e;
+  --color2: #02022e;
+  --color3: #7645d8;
+  --carousel-grad1: rgba(2, 2, 46, 0.6755077031);
+  --carousel-grad2: rgba(255, 255, 255, 0);
 }
-body {
-    overflow-x: hidden;
-    background-color: #100721;
-    color: white;
-}
+
 nav, li {
     display: flex;
     flex-direction: row;
     list-style: none;
 }
 #clients {
-    border-style: solid;
     border-width: 1px;
 }
 .bd-placeholder-img {
@@ -32,80 +33,56 @@ nav, li {
   display: flex;
   justify-content: center;
 }
-.carousel-item .row {
+.clientcontainer {
   display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.carousel-item .content {
-  border-radius: 0.5rem;
-  box-shadow: 1px 5px 15px #1e0e3e;
-  overflow: hidden;
-  text-align: center;
-}
-
-.carousel_container h3 {
-  text-align: center;
-  color: #fff;
-  margin-bottom: 20px;
-}
-
-.carousel_container {
-  display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   height: 500px;
   gap: 10px;
 }
-
-.carousel_container > div {
-  flex: 0 0 120px;
+.clientcontainer > div {
+  flex: 0 0 250px;
+  height: 350px; 
   border-radius: 0.5rem;
   transition: 0.5s ease-in-out;
   cursor: pointer;
-  box-shadow: 1px 5px 15px #1e0e3e;
+  box-shadow: 1px 5px 15px var(--color1);
   position: relative;
   overflow: hidden;
 }
-
-.carousel_container > div .content {
+.content :is(img) {
+  width: 100%;
+  height: auto;
+}
+.clientcontainer > div .content {
   font-size: 1.5rem;
-  color: #fff;
+  color: var(--text-color1);
   display: flex;
   align-items: center;
   padding: 15px;
   opacity: 0;
   flex-direction: column;
   height: 100%;
-  justify-content: flex-end;
-  background: linear-gradient(0deg, rgba(2, 2, 46, 0.675) 0%, rgba(255, 255, 255, 0) 100%);
-  transform: translatey(100%);
+  justify-content: center;
+  background: var(--color2);
+  background: linear-gradient(0deg, var(--carousel-grad1) 0%, var(--carousel-grad2) 100%);
+  transform: translateY(100%);
   transition: opacity 0.5s ease-in-out, transform 0.5s 0.2s;
   visibility: hidden;
+  position: absolute;
+  bottom: 0;
+  left:0;
+  right: 0;
 }
-
-.carousel_container > div:hover {
+.clientcontainer >div:hover {
   flex: 0 0 250px;
-  box-shadow: 1px 3px 15px #7645d8;
-  transform: translatey(-30px);
+  box-shadow: 1px 3px 15px var(--color3);
+  transform: translateY(-30px);
 }
-
-.carousel_container > div:hover .content {
+.clientcontainer > div:hover .content {
   opacity: 1;
-  transform: translatey(0%);
+  transform: translateY(0%);
   visibility: visible;
-}
-
-.carousel-caption {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  border-radius: 5px;
-  color: #fff;
-}
-.content {
-  background-image: url('{{ client.logo.url }}');
-  height: 500px;
 }
 
 @media (min-width: 768px) {
