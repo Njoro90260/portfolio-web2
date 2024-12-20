@@ -47,13 +47,13 @@
 <section>
   <!-- Carousel Container -->
   <div id="clientCarousel" class="carousel slide" data-bs-ride="carousel">
-    <!-- Indicators (for carousel navigation) -->
+    
     <div class="carousel-indicators">
       {% for group in client_groups %}
         <button type="button" data-bs-target="#clientCarousel" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-current="true" aria-label="Slide {{ forloop.counter }}"></button>
       {% endfor %}
     </div>
-    <!-- Carousel Inner (where client groups will be shown) -->
+
     <div class="carousel-inner">
       {% for group in client_groups %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
@@ -61,6 +61,7 @@
             {% for client in group %}
               {% if client %}
                 <div class="content">
+                  <img src="{{ client.logo.url }}" alt="{{ client.name }}">
                   <h1>{{ client.name }}</h1>
                 </div>
               {% endif %}
