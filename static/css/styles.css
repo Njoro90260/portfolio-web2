@@ -34,7 +34,6 @@ nav, li {
   justify-content: center;
 }
 .clientcontainer {
-  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -42,10 +41,8 @@ nav, li {
   gap: 10px;
 }
 .clientcontainer > div {
-  flex: 0 0 300px;
-  /* to be reviewd */
+  flex: 0 0 250px;
   height: 350px; 
-  /* to be reviewd */
   border-radius: 0.5rem;
   transition: 0.5s ease-in-out;
   cursor: pointer;
