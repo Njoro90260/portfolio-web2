@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
 :root {
   --text-color1: #FFF;
+  --text-color2: #f3f3f3;
   --color1: #1e0e3e;
   --color2: #02022e;
   --color3: #7645d8;
@@ -9,10 +10,34 @@
   --carousel-grad2: rgba(255, 255, 255, 0);
 }
 
-nav, li {
-    display: flex;
-    flex-direction: row;
-    list-style: none;
+.navbar {
+  background: var(--color2);
+  background: linear-gradient(0deg, var(--carousel-grad1) 0%, var(--carousel-grad2) 100%);
+  box-shadow: 1px 5px 15px var(--color1);
+  width: 98%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+.nav-item:hover {
+  cursor: pointer;
+}
+.btn {
+  background: var(--color2);
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--text-color1);
+  border-radius: 10px;
+  color: var(--text-color2);
+  transition: background-color, box-shadow 0.3s ease;
+}
+
+.btn:hover {
+  background-color: var(--color3);
+  box-shadow: 0 0 20px var(--color1), 0 0 30px var(--color2);
+  transform: scale(1.05);
+  font-weight: bold;
+  color: var(--text-color2);
 }
 #clients {
     border-width: 1px;
