@@ -9,7 +9,12 @@
   --carousel-grad1: rgba(2, 2, 46, 0.6755077031);
   --carousel-grad2: rgba(255, 255, 255, 0);
 }
-
+body {
+  margin: 0;
+  font-family: Arial, sans-serif !important;
+  background-color: #000 !important; 
+  color: var(--text-color1) !important;
+}
 .navbar {
   background: var(--color2);
   background: linear-gradient(0deg, var(--carousel-grad1) 0%, var(--carousel-grad2) 100%);
@@ -59,6 +64,32 @@
   display: flex;
   justify-content: center;
 }
+
+/* canvas styles */
+canvas {
+  display: block;
+}
+ .footer {
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 12px;
+ }
+ .footer div {
+  display: flex;
+  align-items: center;
+ }
+
+ .footer div img {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+ }
+/* canvas styles */
 
 .grid-cell {
   display: flex;
