@@ -16,13 +16,16 @@ body {
   color: var(--text-color1) !important;
 }
 .navbar {
-  background: var(--color2);
-  background: linear-gradient(0deg, var(--carousel-grad1) 0%, var(--carousel-grad2) 100%);
+  background: var(--color2) !important;
+  background: linear-gradient(0deg, var(--carousel-grad1) 0%, var(--carousel-grad2) 100%) !important;
   box-shadow: 1px 5px 15px var(--color1);
   width: 98%;
   border-radius: 10px;
   display: flex;
   align-items: center;
+}
+.nav-link {
+  color: var(--text-color1) !important;
 }
 .nav-item:hover {
   cursor: pointer;
