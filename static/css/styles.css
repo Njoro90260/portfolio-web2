@@ -1,4 +1,7 @@
-
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('fonts\AndaluciaRegular-m22BP.ttf') format('truetype');
+}
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
 :root {
   --text-color1: #FFF;
@@ -10,10 +13,13 @@
   --carousel-grad2: rgba(255, 255, 255, 0);
 }
 body {
-  margin: 0;
-  font-family: Arial, sans-serif !important;
   background-color: #000 !important; 
   color: var(--text-color1) !important;
+  font-style: normal !important;
+}
+h1, h2, h3 {
+  font-weight: 100 !important;
+  font-style: italic;
 }
 .navbar {
   background: var(--color2) !important;
@@ -68,32 +74,33 @@ body {
   justify-content: center;
 }
 
-/* canvas styles */
-canvas {
+/* Canvas styles */
+#pitchCanvas {
   display: block;
-}
- .footer {
-  position: fixed;
-  bottom: 10px;
-  left: 0;
+  position: relative;
+  z-index: -1;
   width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  font-size: 12px;
- }
- .footer div {
-  display: flex;
-  align-items: center;
- }
+  height: 100vh;
+}
 
- .footer div img {
-  width: 16px;
-  height: 16px;
-  margin-right: 5px;
- }
-/* canvas styles */
-
+/* Profile styles */
+.profile {
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  z-index: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+}
+.profile > div {
+  margin: 35vh;
+}
+.lead-text {
+  font-family: 'MycustomFont';
+  font-size: 100px !important;
+}
 .grid-cell {
   display: flex;
   justify-content: center;
