@@ -30,6 +30,7 @@ class Client(models.Model):
 
 class Testimonial(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    clientProfile = models.ForeignKey
     testimonial_text = models.TextField()
     submitted_on = models.DateTimeField(auto_now_add=True)
 

@@ -1,21 +1,23 @@
 {% extends "my_portfolio/base.html" %}
-
+{% block title %}
+<title>Home | ihicodes</title>
+{% endblock title %}
 {% block content %}
 
 <section>
   <!-- Profiles -->
   <canvas id="pitchCanvas"></canvas>
-  <div class="px-3 profile">
-    <div class="lead-text">
-      <h1>welcome</h1>
-      <p class="lead">Software at your fingertips.</p>
+  <div class="px-3 profile d-flex flex-column flex-md-row align-items-center justify-content-center">
+    <div class="lead-text text-center">
+      <h1 class="display-4 lead">IHICODES</h1>
+      <p class="lead fs-5">this software pltform is dedicated to work for you and to cater for yor needs, randing from web development, web scraping, work, it's like your personal It guy!</p>
     </div>
-    <div>
+    <div class="text-center">
       <h2>User Profile</h2>
       {% if user.username %}
-      <a href="{% url 'my_portfolio:profile' username=user.username %}">Profile</a>
+      <a href="{% url 'my_portfolio:profile' username=user.username %}" class="btn btn-primary">Profile</a>
       {% else %}
-      <a href="#">Profile (Unavailable)</a>
+      <a href="#" class="btn btn-secondary">Profile (Unavailable)</a>
       {% endif %}
     </div>
   </div>
@@ -64,6 +66,7 @@
 </section>
 <hr>
 <section id="clients">
+  <!-- clents -->
   <h2>Clients</h2>
   <!-- Carousel Container -->
   <div id="clientCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -110,6 +113,11 @@
 <section id="Testimonials">
   <!-- Testimonials -->
   <h3>Testimonials</h3>
+  <div class="testimonial-card">
+    <div class="testimonial-header">
+      <img src="" alt="">
+    </div>
+  </div>
   {% for testimonial in testimonials %}
   <li>
     <h4>{{ testimonial.client }}</h4>

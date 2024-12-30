@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const numStars = 100; 
 
     function randomColor() {
-        const colors = ['#ffffff', '#ff9a9e', '#fad0c4', '#fbc2eb', '#a18cd1', '#fbc2eb', '#ff9a9e'];
+        const colors = ['#FFF', '#f3f3f3', '#1e0e3e', '#02022e', '#7645d8', '#02022eac', '#ffffff80'];          
         return colors[Math.floor(Math.random() * colors.length)];
     }
 
