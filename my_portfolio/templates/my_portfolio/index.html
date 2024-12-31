@@ -109,23 +109,48 @@
 
 
 <hr>
-
-<section id="Testimonials">
-  <!-- Testimonials -->
-  <h3>Testimonials</h3>
-  <div class="testimonial-card">
-    <div class="testimonial-header">
-      <img src="" alt="">
+<section id="Testimonials" class="py-5 bg-dark text-light">
+  <!-- Testimonials Section -->
+  <div class="container">
+    <h3 class="text-center mb-5">Testimonials</h3>
+    <div class="row justify-content-center">
+      {% for testimonial in testimonials %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card bg-dark text-light border-0 shadow-sm">
+          <div class="card-body">
+            <!-- Client Logo -->
+            <div class="d-flex justify-content-center mb-3">
+              {% if testimonial.client.logo %}
+              <img src="{{ testimonial.client.logo.url }}" alt="{{ testimonial.client.name }} Logo" class="rounded-circle img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
+              {% endif %}
+            </div>
+            <!-- Testimonial Content -->
+            <div class="text-center">
+              <div class="quote-icon mb-3">
+                <i class="bi bi-quote text-primary" style="font-size: 1.5rem;"></i>
+              </div>
+              <p class="card-text fst-italic">"{{ testimonial.testimonial_text }}"</p>
+            </div>
+            <!-- Author Info -->
+            <div class="testimonial-author d-flex align-items-center mt-4">
+              {% if testimonial.client.logo %}
+              <div class="me-3">
+                <img src="static\img\7edcc259-e91b-4bad-b0b8-79927b8b3d07.jpg" alt="Author" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+              </div>
+              {% endif %}
+              <div>
+                <h6 class="mb-0">{{ testimonial.client.name }}</h6>
+                <small class="text-muted">{{ testimonial.submitted_on|date:"F j, Y" }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
   </div>
-  {% for testimonial in testimonials %}
-  <li>
-    <h4>{{ testimonial.client }}</h4>
-    <p>{{ testimonial.testimonial_text }}</p>
-    <small>{{ testimonial.submitted_on }}</small>
-  </li>
-  {% endfor %}
 </section>
+
 <hr>
 <section id="contact" class="container">
   <!-- Contact section -->
