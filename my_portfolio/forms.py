@@ -12,6 +12,13 @@ class TestimonialForm(forms.ModelForm):
     class Meta:
         model = Testimonial
         fields = ['testimonial_text']
+        widgets = {
+            'testimonial_text': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'submit your testimonial',
+                'rows': 4,
+            }),
+        }
 
 class ContactMessageForm(forms.ModelForm):
     class Meta:
@@ -22,7 +29,30 @@ class ContactMessageForm(forms.ModelForm):
             'subject',
             'message',
         ]
-        
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter your name',
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter your email',
+            }),
+            'subject': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter your email',
+            }),
+            'subject': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter the subject',
+            }),
+            'message': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter your message',
+                'rows': 4,
+            }),
+        }
+    
 class NewsletterSubscriptionForm(forms.ModelForm):
     class Meta:
         model= NewsletterSubscription
