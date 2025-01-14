@@ -10,7 +10,8 @@
   <div class="px-3 profile d-flex flex-column flex-md-row align-items-center justify-content-center">
     <div class="lead-text text-center">
       <h1 class="display-4 lead">IHICODES</h1>
-      <p class="lead fs-5">this software pltform is dedicated to work for you and to cater for yor needs, randing from web development, web scraping, work, it's like your personal It guy!</p>
+      <p class="lead fs-5">this software pltform is dedicated to work for you and to cater for yor needs, randing from
+        web development, web scraping, work, it's like your personal It guy!</p>
     </div>
     <div class="text-center">
       <h2>User Profile</h2>
@@ -30,23 +31,23 @@
 
   <div class="row project-container">
     {% for project in projects %}
-      {% if forloop.counter|divisibleby:2 %}
-        <div class="col-md-6 grid-cell grid-text">
-          <h3>{{ project.title }}</h3>
-          <p>{{ project.description | truncatewords:50 }}</p>
-        </div>
-        <div class="col-md-6 grid-cell">
-          <img src="{{ project.image.url }}" alt="{{ project.title }}">
-        </div>
-      {% else %}
-        <div class="col-md-6 grid-cell">
-          <img src="{{ project.image.url }}" alt="{{ project.title }}">
-        </div>
-        <div class="col-md-6 grid-cell grid-text">
-          <h3>{{ project.title }}</h3>
-          <p>{{ project.description | truncatewords:50 }}</p>
-        </div>
-      {% endif %}
+    {% if forloop.counter|divisibleby:2 %}
+    <div class="col-md-6 grid-cell grid-text">
+      <h3>{{ project.title }}</h3>
+      <p>{{ project.description | truncatewords:50 }}</p>
+    </div>
+    <div class="col-md-6 grid-cell">
+      <img src="{{ project.image.url }}" alt="{{ project.title }}">
+    </div>
+    {% else %}
+    <div class="col-md-6 grid-cell">
+      <img src="{{ project.image.url }}" alt="{{ project.title }}">
+    </div>
+    <div class="col-md-6 grid-cell grid-text">
+      <h3>{{ project.title }}</h3>
+      <p>{{ project.description | truncatewords:50 }}</p>
+    </div>
+    {% endif %}
     {% endfor %}
   </div>
 
@@ -70,27 +71,29 @@
   <h2>Clients</h2>
   <!-- Carousel Container -->
   <div id="clientCarousel" class="carousel slide" data-bs-ride="carousel">
-    
+
     <div class="carousel-indicators">
       {% for group in client_groups %}
-        <button type="button" data-bs-target="#clientCarousel" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-current="true" aria-label="Slide {{ forloop.counter }}"></button>
+      <button type="button" data-bs-target="#clientCarousel" data-bs-slide-to="{{ forloop.counter0 }}"
+        class="{% if forloop.first %}active{% endif %}" aria-current="true"
+        aria-label="Slide {{ forloop.counter }}"></button>
       {% endfor %}
     </div>
 
     <div class="carousel-inner">
       {% for group in client_groups %}
-        <div class="carousel-item {% if forloop.first %}active{% endif %}">
-          <div class="clientcontainer">
-            {% for client in group %}
-              {% if client %}
-                <div class="content">
-                  <img src="{{ client.logo.url }}" alt="{{ client.name }}">
-                  <h1>{{ client.name }}</h1>
-                </div>
-              {% endif %}
-            {% endfor %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <div class="clientcontainer">
+          {% for client in group %}
+          {% if client %}
+          <div class="content">
+            <img src="{{ client.logo.url }}" alt="{{ client.name }}">
+            <h1>{{ client.name }}</h1>
           </div>
+          {% endif %}
+          {% endfor %}
         </div>
+      </div>
       {% endfor %}
     </div>
 
@@ -110,22 +113,42 @@
 
 <hr>
 
+
 <section id="Testimonials">
-  <!-- Testimonials -->
-  <h3>Testimonials</h3>
-  <div class="testimonial-card">
-    <div class="testimonial-header">
-      <img src="" alt="">
+  <div id="testimonial-section" class="container mt-5">
+    <h2 class="text-center mb-4">What Our Clients Say</h2>
+    <div id="testimonial-carousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        {% for testimonial in testimonials %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <div class="text-center">
+            {% if testimonial.client.logo %}
+            <img src="{{ testimonial.client.logo.url }}" alt="{{ testimonial.client.name }} Logo"
+              class="rounded-circle mb-3" style="width: 100px; height: 100px;">
+            {% endif %}
+            <h5>{{ testimonial.client.name }}</h5>
+            {% if testimonial.clientProfile %}
+            <p class="text-muted">{{ testimonial.clientProfile.role }}</p>
+            {% endif %}
+            <blockquote class="blockquote text-center">
+              <p>{{ testimonial.testimonial_text }}</p>
+            </blockquote>
+            <p class="text-muted">{{ testimonial.submitted_on|date:"F j, Y" }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#testimonial-carousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#testimonial-carousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </button>
     </div>
   </div>
-  {% for testimonial in testimonials %}
-  <li>
-    <h4>{{ testimonial.client }}</h4>
-    <p>{{ testimonial.testimonial_text }}</p>
-    <small>{{ testimonial.submitted_on }}</small>
-  </li>
-  {% endfor %}
 </section>
+<hr>
+
 <hr>
 <section id="contact" class="container">
   <!-- Contact section -->
@@ -152,6 +175,8 @@
   </form>
 </section>
 <hr>
+
+
 <section>
   <!-- Newsletter Subscription Form -->
   <h2>Subscribe to Our Newsletter</h2>
