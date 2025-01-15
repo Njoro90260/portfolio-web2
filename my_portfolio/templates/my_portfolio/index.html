@@ -176,15 +176,4 @@
 </section>
 <hr>
 
-
-<section>
-  <!-- Newsletter Subscription Form -->
-  <h2>Subscribe to Our Newsletter</h2>
-  <form action="." method="post" class="form">
-    {% csrf_token %}
-    {{ newsletter_form.as_p }}
-    <button type="submit" name="newsletter_submit" class="btn btn-primary">Subscribe</button>
-  </form>
-</section>
-<hr>
 {% endblock content %}
