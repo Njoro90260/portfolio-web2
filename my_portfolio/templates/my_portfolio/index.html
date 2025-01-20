@@ -55,15 +55,26 @@
 </section>
 
 <hr>
-<section id="services">
+<section id="services" class="py-5">
   <!-- {% comment %} services section {% endcomment %} -->
-  <h2>Services</h2>
-  {% for service in services %}
-  <h4>{{ service.name }}</h4>
-  <p>{{ service.description | linebreaks }}</p>
-  <button>{{ service.price }}</button>
-  {% endfor %}
-
+  <div class="container">
+    <h2 class="text-center text-white mb-4">Services</h2>
+    <div class="row">
+      {% for service in services %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h4 class="card-title text-white">{{ service.name }}</h4>
+            <p class="card-text">{{ service.description | linebreaks }}</p>
+          </div>
+          <div class="card-footer bg-transparent border-0 text-center">
+            <button class="btn" style="background-color: var(--color3); border-color: var(--color3);">{{ service.price }}</button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </section>
 <hr>
 <section id="clients">

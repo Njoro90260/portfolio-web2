@@ -48,7 +48,7 @@ h1, h2, h3 {
 
 .btn:hover {
   background-color: var(--color3);
-  box-shadow: 0 0 20px var(--color1), 0 0 30px var(--color2);
+  box-shadow: 0 0 30px var(--color1), 0 0 40px var(--color2);
   transform: scale(1.05);
   font-weight: bold;
   color: var(--text-color2);
@@ -118,6 +118,32 @@ h1, h2, h3 {
   object-fit: cover;
   border-radius: 8px;
 }
+/* services styles */
+
+#services h2 {
+  font-weight: bold;
+}
+
+#services .card {
+  background-color: var(--color2); color: var(--text-color2);
+  box-shadow: 1px 5px 15px var(--color1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#services .card:hover {
+  transform: translateY(-10px);
+  box-shadow: 1px 3px 15px var(--color3);
+}
+#services .btn {
+  color: var(--text-color2);
+  font-weight: bold;
+}
+
+#services .btn:hover {
+  background-color: var(--color1);
+  border-color: var(--color1);
+}
+/* services styles */
 .grid-text {
   display: flex;
   flex-direction: column;
