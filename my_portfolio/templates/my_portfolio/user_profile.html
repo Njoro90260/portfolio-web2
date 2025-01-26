@@ -1,21 +1,27 @@
 {% extends "my_portfolio/base.html" %}
 
 {% block content %}
-<h2>{{ profile.user.username }}'s Profile</h2>
-<img src="{{ profile.profile_picture.url }}" alt="Profile Picture">
-<p><strong>Bio:</strong> {{ profile.bio }}</p>
-<p><strong>Social Links:</strong></p>
-<ul>
+<h2 class="text-center mt-4">{{ profile.user.username }}'s Profile</h2>
+<div class="text-center">
+  <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="rounded-circle border border-primary mb-3" style="width: 150px; height: 150px;">
+</div>
+<p class="text-center"><strong>Bio:</strong> {{ profile.bio }}</p>
+
+<p class="text-center"><strong>Social Links:</strong></p>
+<ul class="list-inline text-center">
     {% for key, value in profile.social_links.items %}
-    <li class="social-links">
-        <a href="{{ value }}" target="_blank" class="btn btn-outline-primary me-2"
-              onmouseover="hoverButtonEffect(this)" onmouseout="resetButtonEffect(this)">
-              <i class="bi bi-{{ key }}"></i>
-            </a>
+    <li class="list-inline-item">
+        <a href="{{ value }}" target="_blank" class="btn btn-outline-primary btn-lg rounded-circle me-2" 
+           onmouseover="hoverButtonEffect(this)" onmouseout="resetButtonEffect(this)" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+            <i class="bi bi-{{ key }} fs-4"></i>
+        </a>
     </li>
     {% endfor %}
 </ul>
+
 {% if user.is_authenticated and user == profile.user %}
-<a href="{% url 'my_portfolio:edit_profile' username=profile.user.username %}">Edit Profile</a>
+<div class="text-center mt-3">
+    <a href="{% url 'my_portfolio:edit_profile' username=profile.user.username %}" class="btn btn-primary">Edit Profile</a>
+</div>
 {% endif %}
 {% endblock content %}

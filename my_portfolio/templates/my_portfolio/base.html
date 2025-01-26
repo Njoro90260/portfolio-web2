@@ -4,18 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% block title%}
+  {% block title %}
   <title>ihicodes</title>
   {% endblock title %}
-  <title>Document</title>
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   {% load django_bootstrap5 %}
   {% bootstrap_css %}
   {% bootstrap_messages %}
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" />
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" />
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -49,9 +46,6 @@
     </div>
   </nav>
 
-
-
-
   {% if messages %}
   <div id="message-container">
     {% for message in messages %}
@@ -72,17 +66,12 @@
     </div>
   </main>
 
-  <!-- Main Content -->
-  <div class="flex-grow-1">
-    <!-- Add your content here -->
-  </div>
-
   <!-- Footer -->
-  <footer class="footer text-white py-4">
+  <footer class="footer text-white py-4 mt-auto">
     <div class="container">
-      <div class="row">
+      <div class="row text-center">
         <!-- About Section -->
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
           <h5>About Me</h5>
           <p>
             Passionate full-stack developer creating modern, responsive applications. Explore my projects, articles, and
@@ -90,8 +79,8 @@
           </p>
         </div>
         <!-- Newsletter Subscription -->
-        <div class="col-md-4">
-          <h2>Subscribe to Our Newsletter</h2>
+        <div class="col-md-4 mb-4">
+          <h5>Subscribe to Our Newsletter</h5>
           <form action="." method="post" class="form p-4 rounded">
             {% csrf_token %}
             <div class="mb-3">
@@ -102,7 +91,7 @@
           </form>
         </div>
         <!-- Contact Information -->
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
           <h5>Contact</h5>
           <p>
             <a href="mailto:wchegesalome@gmail.com" target="_blank" class="btn btn-outline-primary me-2"
@@ -130,8 +119,6 @@
       </div>
     </div>
   </footer>
-
-
 
   <script src="{% static 'js/scripts.js' %}"></script>
   {% bootstrap_javascript %}
