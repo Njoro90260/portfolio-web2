@@ -7,8 +7,11 @@
 <p><strong>Social Links:</strong></p>
 <ul>
     {% for key, value in profile.social_links.items %}
-    <li>
-        {{ key }}: <a href="{{ value }}" target="_blank">{{ value }}</a>
+    <li class="social-links">
+        <a href="{{ value }}" target="_blank" class="btn btn-outline-primary me-2"
+              onmouseover="hoverButtonEffect(this)" onmouseout="resetButtonEffect(this)">
+              <i class="bi bi-{{ key }}"></i>
+            </a>
     </li>
     {% endfor %}
 </ul>

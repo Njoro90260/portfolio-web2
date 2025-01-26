@@ -20,6 +20,11 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
+.social-links {
+  display: flex !important;
+  flex-direction: column !important;
+  list-style: none !important;
+}
 .flex-grow-1 {
   flex-grow: 1;
 }
