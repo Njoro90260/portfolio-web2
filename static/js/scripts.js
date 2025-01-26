@@ -1,4 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Auto-scroll to contact section if URL contains #contact
+    if (window.location.hash === "#contact") {
+        const contactSection = document.querySelector("#contact");
+        contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+
+    // Real-time character counter for the message field
+    const messageField = document.querySelector("[name='message']");
+    if (messageField) {
+        const charCount = document.createElement("small");
+        charCount.style.display = "block";
+        charCount.style.textAlign = "right";
+        charCount.style.color = "var(--text-color2)";
+        messageField.parentNode.appendChild(charCount);
+
+        messageField.addEventListener("input", function () {
+            charCount.textContent = `${messageField.value.length}/500 characters`;
+            if (messageField.value.length > 500) {
+                charCount.style.color = "red";
+            } else {
+                charCount.style.color = "var(--text-color2)";
+            }
+        });
+    }
     // Smooth scroll
     const links = document.querySelectorAll('nav ul li a');
     links.forEach(link => {

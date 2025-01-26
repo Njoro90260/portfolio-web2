@@ -263,6 +263,38 @@ img:hover {
   transform: translateY(0%);
   visibility: visible;
 }
+
+/* contact styles */
+#contact {
+  color: var(--text-color2);
+  border-radius: 8px;
+}
+
+form {
+  transition: box-shadow 0.3s ease-in-out;
+  background: var(--color2);
+  background: linear-gradient(0deg, var(--carousel-grad1) 0%, var(--carousel-grad2) 100%);
+}
+
+form:hover {
+  box-shadow: 1px 3px 15px var(--color3);
+}
+
+.form-label {
+  color: var(--text-color1);
+}
+
+
+input:focus, textarea:focus {
+  border-color: var(--color3);
+  box-shadow: 0 0 5px var(--color3);
+  outline: none;
+}
+
+
+/* contact styles */
+
+
 .footer {
   background: var(--color2) !important;
   background: linear-gradient(0deg, var(--carousel-grad1) 0%, var(--carousel-grad2) 100%) !important;
@@ -289,6 +321,9 @@ img:hover {
   }
   .lead-text {
     font-size: 1.5rem;
+  }
+  form {
+    padding: 2rem 1rem;
   }
 }
 @keyframes fadeIn {

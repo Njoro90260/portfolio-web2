@@ -13,7 +13,9 @@
   {% load django_bootstrap5 %}
   {% bootstrap_css %}
   {% bootstrap_messages %}
-  {% load custom_filters %}
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" />
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -90,21 +92,36 @@
         <!-- Newsletter Subscription -->
         <div class="col-md-4">
           <h2>Subscribe to Our Newsletter</h2>
-          <form action="." method="post" class="form">
+          <form action="." method="post" class="form p-4 rounded">
             {% csrf_token %}
-            {{ newsletter_form.as_p }}
+            <div class="mb-3">
+              <label class="form-label fw-bold">Your Email</label>
+              {{ newsletter_form.as_p }}
+            </div>
             <button type="submit" name="newsletter_submit" class="btn btn-primary">Subscribe</button>
           </form>
         </div>
         <!-- Contact Information -->
         <div class="col-md-4">
           <h5>Contact</h5>
-          <p>Email: <a href="mailto:your-email@example.com"
-              class="text-white text-decoration-none">your-email@example.com</a></p>
-          <p>GitHub: <a href="https://github.com/your-github" target="_blank"
-              class="text-white text-decoration-none">your-github</a></p>
-          <p>LinkedIn: <a href="https://linkedin.com/in/your-profile" target="_blank"
-              class="text-white text-decoration-none">your-profile</a></p>
+          <p>
+            <a href="mailto:wchegesalome@gmail.com" target="_blank" class="btn btn-outline-primary me-2"
+              onmouseover="hoverButtonEffect(this)" onmouseout="resetButtonEffect(this)">
+              <i class="bi bi-envelope"></i> Email
+            </a>
+          </p>
+          <p>
+            <a href="https://github.com/Njoro90260/" target="_blank" class="btn btn-outline-primary me-2"
+              onmouseover="hoverButtonEffect(this)" onmouseout="resetButtonEffect(this)">
+              <i class="bi bi-github"></i> GitHub
+            </a>
+          </p>
+          <p>
+            <a href="https://www.linkedin.com/in/peter-njoroge-71b689251/" target="_blank" class="btn btn-outline-primary me-2"
+              onmouseover="hoverButtonEffect(this)" onmouseout="resetButtonEffect(this)">
+              <i class="bi bi-linkedin"></i> LinkedIn
+            </a>
+          </p>
         </div>
       </div>
       <hr class="bg-secondary">
