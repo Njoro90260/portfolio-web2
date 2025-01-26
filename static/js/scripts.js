@@ -1,9 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Auto-scroll to contact section if URL contains #contact
-    if (window.location.hash === "#contact") {
-        const contactSection = document.querySelector("#contact");
-        contactSection.scrollIntoView({ behavior: "smooth" });
-    }
 
     // Real-time character counter for the message field
     const messageField = document.querySelector("[name='message']");
@@ -138,20 +133,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         projectContainers.forEach(container => observer.observe(container));
     }
+    // Button hover effects
     function hoverButtonEffect(button) {
-        button.style.backgroundColor = '#7645d8'; // Custom theme color
-        button.style.color = '#fff';
+        button.style.backgroundColor = "#0056b3";
+        button.style.color = "white";
     }
 
     function resetButtonEffect(button) {
-        button.style.backgroundColor = ''; // Reset to default
-        button.style.color = '';
+        button.style.backgroundColor = "transparent";
+        button.style.color = "#0d6efd";
     }
-
-    // Smooth scrolling on page load
-    const projectTitle = document.querySelector('h1');
-    projectTitle.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-    });
 });

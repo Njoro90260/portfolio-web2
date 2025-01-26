@@ -1,15 +1,26 @@
 {% extends "my_portfolio/base.html" %}
+{% load custom_filters %}
+{% block title %}
+<title>Submit Testimonial | {{ client.name }}</title>
+{% endblock title %}
 
 {% block content %}
-<div class="container">
-    <h1>Submit Your Testimonial for {{ client.name }}</h1>
-<form method="post" class="form">
-    {% csrf_token %}
-    <div class="md-3">
-        {{ form.name.label_tag }}
-        {{ form.testimonial_text }}
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<div class="container py-5 h-100">
+    <h1 class="text-center text-primary mb-4">Submit Your Testimonial for {{ client.name }}</h1>
+    <form method="post" class="form p-4 rounded">
+        {% csrf_token %}
+
+        <!-- Testimonial Text Field -->
+        <div class="mb-3">
+            <label for="id_testimonial_text" class="form-label fw-bold">Your Testimonial</label>
+            {{ form.testimonial_text|add_class:"form-control" }}
+        </div>
+
+        <!-- Submit Button -->
+         <div class="text-center">
+            <button type="submit" class="btn btn-primary px-4 py-2">Submit</button>
+         </div>
+    </form>
 </div>
+
 {% endblock content %}
