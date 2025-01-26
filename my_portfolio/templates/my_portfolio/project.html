@@ -2,52 +2,50 @@
 
 {% block content %}
 <div class="container py-5">
-    <!-- Project Title -->
-    <h1 class="text-center text-primary mb-4">{{ project.title }}</h1>
-  
-    <!-- Project Image -->
-    <div class="text-center mb-4">
-      <img 
-        src="{{ project.image.url }}" 
-        alt="{{ project.title }}" 
-        class="img-fluid rounded shadow-sm"
-        style="max-height: 400px; object-fit: cover;" 
-      />
+  <!-- Project Title -->
+  <h1 class="text-center text-primary mb-4">{{ project.title }}</h1>
+
+  <div class="column p-3">
+    <!-- Image Section -->
+    <div class="text-center mb-4 grid-cell">
+      <img src="{{ project.image.url }}" alt="{{ project.title }} image" class="img-fluid rounded shadow-sm w-100"
+        style="max-height: 400px; object-fit: cover;" />
     </div>
-  
-    <!-- Project Technologies -->
-    <div class="mb-3">
-      <h4 class="text-secondary">Technologies Used:</h4>
-      <ul class="list-group">
-        <li class="list-group-item list-group-item-light">{{ project.technologies }}</li>
-      </ul>
+
+    <!-- Text Section -->
+    <div class="grid-cell grid-text">
+      <h3 class="text-primary fw-bold mb-2">{{ project.title }}</h3>
+      <p class="text-muted mb-3">{{ project.description | linebreaks }}</p>
     </div>
-  
-    <!-- Project Links -->
-    <div class="mb-3">
-      <a 
-        href="{{ project.live_link }}" 
-        target="_blank" 
-        class="btn btn-outline-primary me-2"
-        onmouseover="hoverButtonEffect(this)"
-        onmouseout="resetButtonEffect(this)">
-        <i class="bi bi-eye"></i> View Live Project
-      </a>
-      <a 
-        href="{{ project.repo_link }}" 
-        target="_blank" 
-        class="btn btn-outline-secondary"
-        onmouseover="hoverButtonEffect(this)"
-        onmouseout="resetButtonEffect(this)">
-        <i class="bi bi-github"></i> View GitHub Repository
-      </a>
-    </div>
-  
-    <!-- Project Date -->
-    <div>
-      <small class="text-muted">
-        <i class="bi bi-calendar-event me-2"></i>Created at: {{ project.created_at }}
-      </small>
-    </div>
-  </div>  
+  </div>
+</div>
+
+
+<!-- Project Technologies -->
+<div class="mb-3">
+  <h4 class="text-secondary">Technologies Used:</h4>
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-light">{{ project.technologies }}</li>
+  </ul>
+</div>
+
+<!-- Project Links -->
+<div class="mb-3">
+  <a href="{{ project.live_link }}" target="_blank" class="btn btn-outline-primary me-2"
+    onmouseover="hoverButtonEffect(this)" onmouseout="resetButtonEffect(this)">
+    <i class="bi bi-eye"></i> View Live Project
+  </a>
+  <a href="{{ project.repo_link }}" target="_blank" class="btn btn-outline-secondary"
+    onmouseover="hoverButtonEffect(this)" onmouseout="resetButtonEffect(this)">
+    <i class="bi bi-github"></i> View GitHub Repository
+  </a>
+</div>
+
+<!-- Project Date -->
+<div>
+  <small class="text-muted">
+    <i class="bi bi-calendar-event me-2"></i>Created at: {{ project.created_at }}
+  </small>
+</div>
+</div>
 {% endblock content %}

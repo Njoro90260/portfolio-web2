@@ -104,7 +104,11 @@ def submit_testimonial(request, token):
             return redirect('my_portfolio:testimonial_thank_you')
     else:
         form = TestimonialForm()
-    context = {'form': form, 'client': client, 'testimonials': testimonials}
+    context = {
+        'form': form, 
+        'client': client, 
+        'testimonials': testimonials
+    }
     return render(request, 'my_portfolio/submit_testimonial.html', context)
 
 def testimonial_thank_you(request):
@@ -128,8 +132,13 @@ class UserProfileUpdateView(UpdateView):
     form_class = UserProfileForm
 
     def get_object(self, queryset=None):
-        # Restrict edditing to the profile owner
-        profile = get_object_or_404(UserProfile, user=self.request.user)
+        # # Restrict edditing to the profile owner
+        # profile = get_object_or_404(UserProfile, user=self.request.user)
+        # return profile
+        username = self.kwargs.get('usernamre')
+        user = get_object_or_404(User, username=username)
+        # Ensure a UserProfile instance exists for the user
+        profile, created = UserProfile.objects.get_or_create(user=self.request.user)
         return profile
     
 
