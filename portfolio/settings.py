@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Third party apps.
     'debug_toolbar',
     'django_bootstrap5',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

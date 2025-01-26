@@ -16,6 +16,12 @@ body {
   background-color: #000 !important; 
   color: var(--text-color1) !important;
   font-style: normal !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.flex-grow-1 {
+  flex-grow: 1;
 }
 h1, h2, h3 {
   font-weight: 100 !important;
@@ -53,6 +59,64 @@ h1, h2, h3 {
   font-weight: bold;
   color: var(--text-color2);
 }
+/* projects styles */
+
+/* single project styles */
+img {
+  transition: transform 0.3s ease-in-out;
+}
+img:hover {
+  transform: scale(1.05);
+}
+
+/* List item subtle hover */
+.list-group-item:hover {
+  background-color: #f3f3f3;
+  cursor: default;
+}
+
+/* Smooth shadow for container */
+.container {
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* single project styles. */
+.projects-container {
+  background-color: var(--color2);
+  color: var(--text-color1);
+  border-radius: 0.75rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.projects-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.text-color1 {
+  color: var(--text-color1);
+}
+
+.btn-primary {
+  /* background-color: var(--color3) !important; */
+  border-color: var(--color3);
+  color: var(--text-color1);
+  transition: box-shadow 0.4s ease, transform 3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color1);
+  border-color: var(--color1);
+  box-shadow: 0 0 30px var(--color1), 0 0 40px var(--color2);
+  transform: translateY(-2px);
+}
+
+
+.card-img-top {
+  max-height: 200px;
+  object-fit: cover;
+}
+/* projects styles */
 #clients {
     border-width: 1px;
 }
@@ -227,4 +291,12 @@ h1, h2, h3 {
     font-size: 1.5rem;
   }
 }
-
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

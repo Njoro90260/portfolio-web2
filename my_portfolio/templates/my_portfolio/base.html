@@ -15,7 +15,7 @@
   {% bootstrap_messages %}
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
   <nav class="navbar navbar-expand-lg navbar-light mx-auto mt-4">
     <div class="container-fluid">
       <a class="navbar-brand" href="{% url 'my_portfolio:index' %}">Home</a>
@@ -69,6 +69,12 @@
     </div>
   </main>
 
+  <!-- Main Content -->
+  <div class="flex-grow-1">
+    <!-- Add your content here -->
+  </div>
+
+  <!-- Footer -->
   <footer class="footer text-white py-4">
     <div class="container">
       <div class="row">
@@ -106,6 +112,7 @@
       </div>
     </div>
   </footer>
+
 
 
   <script src="{% static 'js/scripts.js' %}"></script>

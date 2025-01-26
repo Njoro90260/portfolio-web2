@@ -161,30 +161,49 @@
 <hr>
 
 <hr>
-<section id="contact" class="container">
-  <!-- Contact section -->
-  <h3>Contact Us.</h3>
-  <form action="." method="post" class="form">
+<section id="contact" class="container py-5">
+  <!-- Contact Section -->
+  <h3 class="text-center text-primary mb-4">Contact Us</h3>
+  
+  <form action="." method="post" class="form p-4 shadow-sm rounded bg-light">
     {% csrf_token %}
+    
+    <!-- Name Field -->
     <div class="mb-3">
-      {{ contact_form.name.label_tag }}
-      {{ contact_form.name }}
+      <label class="form-label fw-bold">{{ contact_form.name.label }}</label>
+      {{ contact_form.name|add_class:"form-control" }}
     </div>
+    
+    <!-- Email Field -->
     <div class="mb-3">
-      {{ contact_form.email.label_tag }}
-      {{ contact_form.email }}
+      <label class="form-label fw-bold">{{ contact_form.email.label }}</label>
+      {{ contact_form.email|add_class:"form-control" }}
     </div>
+    
+    <!-- Subject Field -->
     <div class="mb-3">
-      {{ contact_form.subject.label_tag }}
-      {{ contact_form.subject }}
+      <label class="form-label fw-bold">{{ contact_form.subject.label }}</label>
+      {{ contact_form.subject|add_class:"form-control" }}
     </div>
+    
+    <!-- Message Field -->
     <div class="mb-3">
-      {{ contact_form.message.label_tag }}
-      {{ contact_form.message }}
+      <label class="form-label fw-bold">{{ contact_form.message.label }}</label>
+      {{ contact_form.message|add_class:"form-control" }}
     </div>
-    <button type="submit" name="contact_submit" class="btn btn-primary">Send Message</button>
+    
+    <!-- Submit Button -->
+    <div class="text-center">
+      <button 
+        type="submit" 
+        name="contact_submit" 
+        class="btn btn-primary px-4 py-2">
+        Send Message
+      </button>
+    </div>
   </form>
 </section>
+
 <hr>
 
 {% endblock content %}

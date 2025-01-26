@@ -1,11 +1,53 @@
 {% extends "my_portfolio/base.html" %}
 
 {% block content %}
-
-<h1>{{ project.title }}</h1>
-<img src="{{ project.image.url }}" alt="{{ project.title }}">
-<li>{{ project.technologies }}</li>
-<a href="{{ project.live_link }}" target="_blank">View the live project here!</a> <br/>
-<a href="{{ project.repo_link }}" target="_blank">Click here to view the github repository.</a> <br/>
-<small>created at: {{ project.created_at }}</small>
+<div class="container py-5">
+    <!-- Project Title -->
+    <h1 class="text-center text-primary mb-4">{{ project.title }}</h1>
+  
+    <!-- Project Image -->
+    <div class="text-center mb-4">
+      <img 
+        src="{{ project.image.url }}" 
+        alt="{{ project.title }}" 
+        class="img-fluid rounded shadow-sm"
+        style="max-height: 400px; object-fit: cover;" 
+      />
+    </div>
+  
+    <!-- Project Technologies -->
+    <div class="mb-3">
+      <h4 class="text-secondary">Technologies Used:</h4>
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-light">{{ project.technologies }}</li>
+      </ul>
+    </div>
+  
+    <!-- Project Links -->
+    <div class="mb-3">
+      <a 
+        href="{{ project.live_link }}" 
+        target="_blank" 
+        class="btn btn-outline-primary me-2"
+        onmouseover="hoverButtonEffect(this)"
+        onmouseout="resetButtonEffect(this)">
+        <i class="bi bi-eye"></i> View Live Project
+      </a>
+      <a 
+        href="{{ project.repo_link }}" 
+        target="_blank" 
+        class="btn btn-outline-secondary"
+        onmouseover="hoverButtonEffect(this)"
+        onmouseout="resetButtonEffect(this)">
+        <i class="bi bi-github"></i> View GitHub Repository
+      </a>
+    </div>
+  
+    <!-- Project Date -->
+    <div>
+      <small class="text-muted">
+        <i class="bi bi-calendar-event me-2"></i>Created at: {{ project.created_at }}
+      </small>
+    </div>
+  </div>  
 {% endblock content %}
