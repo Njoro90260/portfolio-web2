@@ -24,7 +24,7 @@ def index(request):
     clients = Client.objects.all()
     client_groups = list(make_groups(clients, 4))
     client_instance = Client.objects.first()
-    testimonials = Testimonial.objects.all()
+    testimonials = Testimonial.objects.select_related('client').all()
 
     # initialize to avoid UnboundLocalError
     contact_form = ContactMessageForm()

@@ -13,7 +13,7 @@ class UserProfile(models.Model):
     social_links = models.JSONField(default=dict, blank=True)
 
     def __str__(self):
-        return self.user.username  # Return the username as a string
+        return self.user.username
 
 
 class Client(models.Model):
@@ -30,13 +30,15 @@ class Client(models.Model):
 
 class Testimonial(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    clientProfile = models.ForeignKey
     testimonial_text = models.TextField()
     submitted_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Testimonial from {self.client.name}: {self.testimonial_text[:50]}..."
-
+    
+    @property
+    def client_logo(self):
+        return self.client.logo.url if self.client.logo else None
 
 class Project(models.Model):
     """Project model to store information about each project."""
