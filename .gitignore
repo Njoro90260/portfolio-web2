@@ -8,3 +8,4 @@ get-pip.py
 img/
 images/
 .vercel
+secrets.py
