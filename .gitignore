@@ -7,3 +7,4 @@ __pycache__/
 get-pip.py
 img/
 images/
+.vercel
