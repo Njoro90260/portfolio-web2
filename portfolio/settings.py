@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os 
 import environ
+import dj_database_url
 
 env = environ.Env()
 environ.Env.read_env()
@@ -88,10 +89,11 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+# postgresql://peter:8wbQG1UsnHY5q2DzT3ybMGb8Z0aTeOU1@dpg-cubtd32n91rc73978pvg-a.oregon-postgres.render.com/ihicodes_django_app
 DATABASES = {
     'default': env.db('DATABASE_URL')
 }
+
 
 
 # Password validation
@@ -129,7 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_DIRS = os.path.join(BASE_DIR, 'static')
+STATIC_DIRS = [BASE_DIR / 'static']
 
 
 
