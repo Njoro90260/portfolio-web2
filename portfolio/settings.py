@@ -18,6 +18,7 @@ environ.Env.read_env()
 from dotenv import load_dotenv
 from pathlib import Path
 from decouple import config
+import dj_database_url
 
 load_dotenv()
 
@@ -89,9 +90,17 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-# postgresql://peter:8wbQG1UsnHY5q2DzT3ybMGb8Z0aTeOU1@dpg-cubtd32n91rc73978pvg-a.oregon-postgres.render.com/ihicodes_django_app
+
 DATABASES = {
-    'default': env.db('DATABASE_URL')
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL'),
+        conn_max_age=600
+    )
+}
+
+# Add schema search path only if using multiple schemas
+DATABASES['default']['OPTIONS'] = {
+    'options': '-c search_path=portfolio_db'
 }
 
 
