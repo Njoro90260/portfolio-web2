@@ -28,6 +28,7 @@
 <hr>
 <!-- Projects section -->
 <section id="projects">
+  {% if projects %}
   <h2>Featured Projects</h2>
 
   <div class="row project-container">
@@ -53,10 +54,12 @@
   </div>
 
   <a href="{% url 'my_portfolio:projects' %}">View More</a>
+  {% endif %}
 </section>
 
 <hr>
 <section id="services" class="py-5">
+  {% if services %}
   <!-- {% comment %} services section {% endcomment %} -->
   <div class="container">
     <h2 class="text-center text-white mb-4">Services</h2>
@@ -69,19 +72,20 @@
             <p class="card-text">{{ service.description | linebreaks }}</p>
           </div>
           <div class="card-footer bg-transparent border-0 text-center">
-            <button class="btn" style="background-color: var(--color3); border-color: var(--color3);">{{ service.price }}</button>
+            <!-- <button class="btn" style="background-color: var(--color3); border-color: var(--color3);">{{ service.price }}</button> -->
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
   </div>
+  {% endif %}
 </section>
 <hr>
 <section id="clients">
-  <!-- clents -->
-  <h2>Clients</h2>
   {% if clients %}
+    <!-- clents -->
+  <h2>Clients</h2>
   <!-- Carousel Container -->
   <div id="clientCarousel" class="carousel slide" data-bs-ride="carousel">
 

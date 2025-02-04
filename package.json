@@ -1,6 +1,0 @@
-{
-    "scripts": {
-      "start": "gunicorn portfolio.wsgi"
-    }
-  }
-  
