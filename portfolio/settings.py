@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     # Third party apps.
-    'debug_toolbar',
     'django_bootstrap5',
     'whitenoise.runserver_nostatic',
 ]
