@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'MyCustomFont';
-  src: url('fonts\AndaluciaRegular-m22BP.ttf') format('truetype');
+  font-family: 'AndaluciaRegular';
+  src: url('/static/css/fonts/AndaluciaRegular-m22BP.ttf') format('truetype');
 }
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
 :root {
@@ -171,7 +171,7 @@ img:hover {
   margin: 1;
 }
 .lead-text {
-  font-family: 'MycustomFont';
+  font-family: 'AndaluciaRegular';
   font-size: 5rem;
   font-weight: bold;
 }
