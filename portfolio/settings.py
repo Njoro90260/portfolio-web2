@@ -162,3 +162,6 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+import django_heroku
+django_heroku.settings(locals())
