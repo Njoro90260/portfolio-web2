@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'AndaluciaRegular';
-  src: url('/static/css/fonts/AndaluciaRegular-m22BP.ttf') format('truetype');
+  font-family: 'Silkscreen';
+  src: url('/static/css/fonts/Silkscreen-Bold.ttf') format('truetype');
 }
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
 :root {
@@ -171,7 +171,7 @@ img:hover {
   margin: 1;
 }
 .lead-text {
-  font-family: 'AndaluciaRegular';
+  font-family: 'Silkscreen';
   font-size: 5rem;
   font-weight: bold;
 }
