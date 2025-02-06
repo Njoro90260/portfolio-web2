@@ -92,8 +92,8 @@
 </section>
 <hr>
 <section id="clients">
-  {% if clients %}
   <!-- clents -->
+  {% if clients %}
   <h2>Clients</h2>
   <!-- Carousel Container -->
   <div id="clientCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -111,12 +111,15 @@
       <div class="carousel-item {% if forloop.first %}active{% endif %}">
         <div class="clientcontainer">
           {% for client in group %}
-          {% if client %}
           <div class="content">
+            {% if client.logo %}
             <img src="{{ client.logo.url }}" alt="{{ client.name }}">
+            {% else %}
+            <img src="{{ MEDIA_URL }}" alt="Default logo">
+            {% endif %}
+
             <h1>{{ client.name }}</h1>
           </div>
-          {% endif %}
           {% endfor %}
         </div>
       </div>
