@@ -22,6 +22,9 @@ def index(request):
     projects = Project.objects.all()[:3]
     services = Service.objects.all()
     clients = Client.objects.all()
+    for client in clients:
+        if not client.logo:
+            client.logo = 'logos/default-logo.webp' # Fallback to default.
     client_groups = list(make_groups(clients, 4))
     client_instance = Client.objects.first()
     testimonials = Testimonial.objects.select_related('client').all()
