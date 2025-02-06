@@ -8,21 +8,30 @@
 <section>
   <!-- Profiles -->
   <canvas id="pitchCanvas"></canvas>
-  <div class="px-3 profile d-flex flex-column flex-md-row align-items-center justify-content-center">
-    <div class="lead-text text-center">
-      <h1 class="display-4 lead">IHICODES</h1>
-      <p class="lead fs-5">this software pltform is dedicated to work for you and to cater for yor needs, randing from
-        web development, web scraping, work, it's like your personal It guy!</p>
+
+  <div class="container position-absolute top-50 start-50 translate-middle text-center">
+    <div class="row justify-content-center align-items-center py-5 g-4">
+
+      <div class="col-12 col-md-6">
+        <h1 class="display-4 lead">Welcome to my portfolio!</h1>
+        <p class="fs-4 fw-semibold">
+          This software platform is dedicated to working for you and catering to your needs, ranging from
+          web development to web scraping—it's like having your personal IT guy!
+        </p>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <h2 class="fs-3">User Profile</h2>
+        {% if user.is_authenticated and user.userprofile %}
+        <a href="{% url 'my_portfolio:profile' username=user.username %}" class="btn btn-primary btn-lg">Profile</a>
+        {% else %}
+        <a href="#" class="btn btn-outline-secondary btn-lg">Profile (Unavailable)</a>
+        {% endif %}
+      </div>
+
     </div>
-    <div class="text-center">
-      <h2>User Profile</h2>
-      {% if user.is_authenticated and user.userprofile %}
-      <a href="{% url 'my_portfolio:profile' username=user.username %}" class="btn btn-primary">Profile</a>
-      {% else %}
-      <a href="#" class="btn btn-secondary">Profile (Unavailable)</a>
-      {% endif %}
-    </div>    
   </div>
+
 </section>
 
 <hr>
@@ -84,7 +93,7 @@
 <hr>
 <section id="clients">
   {% if clients %}
-    <!-- clents -->
+  <!-- clents -->
   <h2>Clients</h2>
   <!-- Carousel Container -->
   <div id="clientCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -173,40 +182,37 @@
 <section id="contact" class="container py-5">
   <!-- Contact Section -->
   <h3 class="text-center text-primary mb-4">Contact</h3>
-  
+
   <form action="." method="post" class="form p-4 rounded">
     {% csrf_token %}
-    
+
     <!-- Name Field -->
     <div class="mb-3">
       <label class="form-label fw-bold">{{ contact_form.name.label }}</label>
       {{ contact_form.name|add_class:"form-control" }}
     </div>
-    
+
     <!-- Email Field -->
     <div class="mb-3">
       <label class="form-label fw-bold">{{ contact_form.email.label }}</label>
       {{ contact_form.email|add_class:"form-control" }}
     </div>
-    
+
     <!-- Subject Field -->
     <div class="mb-3">
       <label class="form-label fw-bold">{{ contact_form.subject.label }}</label>
       {{ contact_form.subject|add_class:"form-control" }}
     </div>
-    
+
     <!-- Message Field -->
     <div class="mb-3">
       <label class="form-label fw-bold">{{ contact_form.message.label }}</label>
       {{ contact_form.message|add_class:"form-control" }}
     </div>
-    
+
     <!-- Submit Button -->
     <div class="text-center">
-      <button 
-        type="submit" 
-        name="contact_submit" 
-        class="btn btn-primary px-4 py-2">
+      <button type="submit" name="contact_submit" class="btn btn-primary px-4 py-2">
         Send Message
       </button>
     </div>

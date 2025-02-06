@@ -1,6 +1,8 @@
 @font-face {
-  font-family: 'AndaluciaRegular';
-  src: url("/static/css/fonts/AndaluciaRegular-m22BP.4d52ed6d1221.ttf") format('truetype');
+  font-family: 'Silkscreen';
+  src: url("/static/css/fonts/Silkscreen-Bold.aa595a6499f2.ttf") format('truetype');
+  font-family: 'Amatic';
+  src: url("/static/css/fonts/Amatic_SC/AmaticSC-Regular.04b6b0803b08.ttf") format('truetype');
 }
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
 :root {
@@ -171,11 +173,16 @@ img:hover {
   margin: 1;
 }
 .lead-text {
-  font-family: 'AndaluciaRegular';
   font-size: 5rem;
   font-weight: bold;
 }
+.lead-description {
+  font-family: 'Amatic' !important;
+  font-size: 2rem !important;
+  font-weight: bold !important;
+}
 .lead {
+  font-family: 'Silkscreen' !important;
   font-size: calc(4.475rem + 2.7vw) !important;
 }
 
