@@ -171,3 +171,4 @@ cython_debug/
 .pypirc
 .vercel
 staticfiles/
+app/data.json
