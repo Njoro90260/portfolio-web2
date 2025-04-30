@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install -y \
     gcc \
     libpq-dev \
     postgresql-client \
+    libpcre3-dev \
+    mime-support \
     && pip install --upgrade pip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -19,13 +21,13 @@ RUN apt-get update && apt-get install -y \
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r requirements.txt
 
-USER user
 
 # Create directory structure with correct permissions
-RUN mkdir -p /vol/static /vol/media /var/log/uwsgi && \
+# Create directory structure with correct permissions
+RUN mkdir -p /app/vol/static /app/vol/media /var/log/uwsgi && \
     adduser --disabled-password --no-create-home user && \
-    chown -R user:user /vol /var/log/uwsgi && \
-    chmod -R 775 /vol && \
+    chown -R user:user /app/vol /var/log/uwsgi && \
+    chmod -R 775 /app/vol && \
     chmod -R 777 /var/log/uwsgi
 
 # Copy application files
@@ -34,5 +36,7 @@ COPY ./scripts/entrypoint.sh /scripts/entrypoint.sh
 RUN chmod +x /scripts/entrypoint.sh
 
 WORKDIR /app
+
+USER user
 
 CMD ["entrypoint.sh"]

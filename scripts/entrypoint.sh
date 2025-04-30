@@ -42,20 +42,29 @@ else
     echo "Superuser creation skipped."
 fi
 
+# Add to entrypoint.sh before starting uWSGI
+echo "Verifying permissions..."
+ls -la /app/vol
+touch /app/vol/static/testfile && rm /app/vol/static/testfile && echo "Static files writable"
+touch /app/vol/media/testfile && rm /app/vol/media/testfile && echo "Media files writable"
 # Determine server type based on environment variable
 if [ "$SERVER_TYPE" = "uwsgi" ]; then
-    echo "Starting uWSGI server (development mode with Nginx)..."
+    echo "Starting uWSGI server (development mode with uWSGI)..."
     uwsgi --http :8000 \
-      --master \
-      --enable-threads \
-      --module project_management.wsgi \
-      --buffer-size 32768 \
-      --http-timeout 300 \
-      --static-safe /static=/vol/static \
-      --static-safe /media=/vol/media
+    --master \
+    --enable-threads \
+    --module portfolio.wsgi \
+    --buffer-size 32768 \
+    --http-timeout 300 \
+    --static-safe /static=/app/vol/static \
+    --static-safe /media=/app/vol/media \
+    --processes 2 \
+    --threads 2 \
+    --harakiri 30 \
+    --max-requests 500
 else
     echo "Starting Gunicorn server (production mode)..."
-    exec gunicorn project_management.wsgi:application \
+    exec gunicorn portfolio.wsgi:application \
         --bind 0.0.0.0:8000 \
         --workers 4 \
         --worker-class sync \

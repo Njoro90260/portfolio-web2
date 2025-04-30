@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'django_extensions',
     # Third party apps.
     'django_bootstrap5',
-    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -147,7 +146,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-STATIC_ROOT = 'vol/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'vol', 'static')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
@@ -163,7 +162,8 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'vol', 'media')
+
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -184,5 +184,8 @@ if DEBUG:
 else:
     INTERNAL_IPS = []
 
-import django_heroku
-django_heroku.settings(locals())
+# import django_heroku
+# django_heroku.settings(locals())
+
+print(f"STATIC_ROOT: {STATIC_ROOT}")
+print(f"MEDIA_ROOT: {MEDIA_ROOT}")
