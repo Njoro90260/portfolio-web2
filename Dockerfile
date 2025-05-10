@@ -4,30 +4,30 @@ ENV PATH="/scripts:${PATH}:/app"
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
-# Install system dependencies
+# Install system dependencies including sudo
 RUN apt-get update && apt-get install -y \
     netcat-openbsd \
     gcc \
-    libpq-dev \
     postgresql-client \
-    libpcre3-dev \
-    mime-support \
+    sudo \
+    gosu \
     && pip install --upgrade pip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-
-# Install python dependencies
+# Install Python dependencies
 COPY ./requirements.txt /requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install -r /requirements.txt
 
+# Create user with sudo privileges (for initial setup only)
+RUN adduser --disabled-password --gecos '' user && \
+    echo 'user ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/user && \
+    chmod 0440 /etc/sudoers.d/user
 
-# Create directory structure with correct permissions
-# Create directory structure with correct permissions
-RUN mkdir -p /app/vol/static /app/vol/media /var/log/uwsgi && \
-    adduser --disabled-password --no-create-home user && \
-    chown -R user:user /app/vol /var/log/uwsgi && \
-    chmod -R 775 /app/vol && \
+# Create directories with correct ownership
+RUN mkdir -p /vol/static /vol/media /var/log/uwsgi && \
+    chown -R user:user /vol/static /vol/media /var/log/uwsgi && \
+    chmod -R 775 /vol/static /vol/media && \
     chmod -R 777 /var/log/uwsgi
 
 # Copy application files
@@ -37,6 +37,5 @@ RUN chmod +x /scripts/entrypoint.sh
 
 WORKDIR /app
 
-USER user
-
+# Start as root (entrypoint will drop privileges)
 CMD ["entrypoint.sh"]

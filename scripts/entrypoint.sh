@@ -1,13 +1,24 @@
 #!/bin/sh
 set -e
 
-echo "Entrypoint script running..."
+# If running as root, setup permissions and drop privileges
+if [ "$(id -u)" = "0" ]; then
+    echo "🔧 Running as root to setup volumes..."
+    mkdir -p /vol/static /vol/media
+    chown -R user:user /vol/static /vol/media
+    chmod -R 775 /vol/static /vol/media
+    
+    echo "🔧 Dropping privileges to user..."
+    exec gosu user "$0" "$@"
+fi
+
+# Normal execution as user continues here
+echo "Entrypoint script running as user: $(whoami)"
+id
 
 # Validate secret key
 if [ -z "$SECRET_KEY" ] || [ "$SECRET_KEY" = "default-dev-secret-key" ] || [ "$SECRET_KEY" = "must-be-set-for-production" ]; then
     echo "ERROR: SECRET_KEY must be properly configured"
-    echo "For production, set it in your environment variables or .env.prod file"
-    echo "For development, you can use the default in .env file"
     exit 1
 fi
 
@@ -20,12 +31,15 @@ while ! nc -z db 5432; do
 done
 echo "PostgreSQL started"
 
+echo "⚙️ Running Django management commands..."
+
 echo "Applying database migrations..."
 python manage.py migrate --noinput
 
 echo "Collecting static files..."
-python manage.py collectstatic --noinput --clear
+python manage.py collectstatic --noinput
 
+# Create superuser
 if [ "$CREATE_SUPERUSER" = "true" ]; then
     echo "Creating superuser..."
     python manage.py shell <<EOF
@@ -42,28 +56,19 @@ else
     echo "Superuser creation skipped."
 fi
 
-# Add to entrypoint.sh before starting uWSGI
-echo "Verifying permissions..."
-ls -la /app/vol
-touch /app/vol/static/testfile && rm /app/vol/static/testfile && echo "Static files writable"
-touch /app/vol/media/testfile && rm /app/vol/media/testfile && echo "Media files writable"
-# Determine server type based on environment variable
+# Start the appropriate server
 if [ "$SERVER_TYPE" = "uwsgi" ]; then
-    echo "Starting uWSGI server (development mode with uWSGI)..."
-    uwsgi --http :8000 \
-    --master \
-    --enable-threads \
-    --module portfolio.wsgi \
-    --buffer-size 32768 \
-    --http-timeout 300 \
-    --static-safe /static=/app/vol/static \
-    --static-safe /media=/app/vol/media \
-    --processes 2 \
-    --threads 2 \
-    --harakiri 30 \
-    --max-requests 500
+    echo "Starting uWSGI server"
+    exec uwsgi --http :8000 \
+      --master \
+      --enable-threads \
+      --module portfolio.wsgi \
+      --buffer-size 32768 \
+      --http-timeout 300 \
+      --static-safe /static=/vol/static \
+      --static-safe /media=/vol/media
 else
-    echo "Starting Gunicorn server (production mode)..."
+    echo "Starting Gunicorn server"
     exec gunicorn portfolio.wsgi:application \
         --bind 0.0.0.0:8000 \
         --workers 4 \
